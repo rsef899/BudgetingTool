@@ -6,21 +6,20 @@ function EntryForm() {
     const [price, setPrice] = useState("");
     const [dateBought, setDate] = useState("");
 
-
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('price', price);
-        formData.append('dateBought', dateBought);
+        const formData = {
+            name: name,
+            price: price,
+            dateBought: dateBought
+        };
 
         fetch('http://localhost:5000/api/add_entry',{
             // post method is used to send data to the server
             method: 'POST',
             headers: {
-                'Content-Type': 'applcation/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
         })
