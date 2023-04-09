@@ -1,9 +1,14 @@
 import './App.css';
 import Header from './Header';
+import Entry from './Entry';
 
 function App() {
   return (
-    <Header />
+    <div>
+      <Header />
+      <Entry />
+    </div>
+    
   );
 }
 
