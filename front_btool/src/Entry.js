@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EntryForm() {
+function EntryForm(props) {
     //[1,2], 1 is name of the state, 2 is the chnaging function of the state
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
@@ -24,14 +24,18 @@ function EntryForm() {
             body: JSON.stringify(formData)
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then((data) => {
+            console.log(data)
+            //update the entries counter
+            props.addEntryChange();
+        })
         .catch(error => console.error(error));
 
         console.log({ name, dateBought, price})
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="mainEntry">
             <label>
                 Item Name:
                 {/*e.taget.value leads to the name variable*/}
@@ -54,6 +58,7 @@ function EntryForm() {
             <br />
             <button type = "submit">Add Expense</button>
         </form>
+        
     );
 }
 

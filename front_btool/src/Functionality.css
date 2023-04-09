@@ -1,0 +1,21 @@
+.EntryStyle {
+    justify-content: flex-start;
+    margin-left: 150px;
+    background-color: rgb(231, 233, 236);
+    width: 25%;
+    height: 300px;
+  }
+  
+  form {
+    padding-left: 25%;
+    padding-top: 10%;
+  }
+  
+  label {
+    display: inline-block;
+    width: 110px;
+  }
+  input {
+    padding: 5px 10px;
+  }
+
