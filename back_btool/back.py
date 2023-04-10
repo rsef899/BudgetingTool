@@ -49,7 +49,7 @@ def recieve_sale_item():
     global saleItems
     saleItems.append(data)
     print("\n")
-    print(str(data))
+    print(str(data['enteredValue']))
     print("\n")
     return {'message': 'Data recieved succesfully'}
         
