@@ -5,6 +5,7 @@ app = Flask(__name__)
 CORS(app)
 
 entriesList = []
+saleItems = []
 html = ""
 
 def create_table():
@@ -31,6 +32,26 @@ def add_entry():
 def get_table():
     #we should return a dictionary that retuns a html string
     return {'table_html': html}
+
+#the table will reset when page refreshed
+@app.route('/api/reset_table', methods=['POST'])
+def reset_table():
+    global html
+    global entriesList
+    html = ""
+    entriesList = []
+    return jsonify(success=True)
+
+#getting the sale value
+@app.route('/api/recieve_sale_item', methods=['POST'])
+def recieve_sale_item():
+    data = request.json
+    global saleItems
+    saleItems.append(data)
+    print("\n")
+    print(str(data))
+    print("\n")
+    return {'message': 'Data recieved succesfully'}
         
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
