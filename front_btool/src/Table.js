@@ -12,6 +12,9 @@ function Table(props){
       }, [props.entriesChange]);
     return(
         /* This renders the string as an html command*/
-        <div dangerouslySetInnerHTML={{ __html: tableHtml }} className="itemsTable"></div>);
+        <div dangerouslySetInnerHTML={{ __html: tableHtml }} className="itemsTable"></div>
+        
+        
+        );
 }
 export default Table;
