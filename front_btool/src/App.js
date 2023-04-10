@@ -32,8 +32,10 @@ function App() {
         <div className='EntryStyle'>
           <Entry addEntryChange ={addEntryChange} />
         </div>
+        <div className="topBox2">
           <Table entriesChange={entriesChange}/>
           <SoldItems entriesChange={entriesChange}/>
+        </div>
       </div>
     </div>
     

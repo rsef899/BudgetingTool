@@ -31,45 +31,22 @@ input {
   padding: 5px 10px;
 }
 
-/* ******************* table css here ->>>>>*/
-.itemsTable{
-  justify-content: flex-start;
+/* ******************* Top container 2 ->>>>>*/
+.topBox2 {
   background-color: rgb(231, 233, 236);
-  width: 600px;
+  width: 700px;
   height: auto;
   border-radius: 10px;
   border: 2px solid #a1a1a1;
   table-layout: fixed;
   font-family: 'Rubik', sans-serif;
+  display: flex;
 }
 
-table {
-  padding-top: 50px;
-  padding-left: 50px;
-  width: 90%;
-  text-align: center;
-}
+.topBox2 tr:nth-child(even) {background-color: #f2f2f2;;}
+.topBox2 tr:hover {background-color: #ddd;}
 
-.itemsTable tr:nth-child(even) {background-color: #f2f2f2;;}
-.itemsTable tr:hover {background-color: #ddd;}
-
-.itemsTable th:first-child,
-.itemsTable td:first-child {
-  width: 40%;
-}
-
-.itemsTable th:nth-child(2),
-.itemsTable td:nth-child(2) {
-  width: 30%;
-}
-
-/* calculate the width of the third column based on the widths of the other columns */
-.itemsTable th:nth-child(3),
-.itemsTable td:nth-child(3) {
-  width: 20%;
-}
-
-.itemsTable th {
+.topBox2 th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
@@ -78,3 +55,39 @@ table {
   border-radius: 3px;
 }
 
+/****************entires table css*/
+.itemsTable{
+  flex: 1;
+}
+
+.itemsTable table {
+  padding-top: 50px;
+  padding-left: 20px;
+  width: 100.3%;
+}
+.topBox2 table {
+  text-align: center;
+}
+
+/*Table 1 column widths*/
+.itemsTable th:first-child,
+.itemsTable td:first-child {
+  width: 40%;
+}
+.itemsTable th:nth-child(2),
+.itemsTable td:nth-child(2) {
+  width: 20%;
+}
+.itemsTable th:nth-child(3),
+.itemsTable td:nth-child(3) {
+  width: 20%;
+}
+
+/********************sold price table styling*/
+.soldItemsTable{
+  padding-top: 50px;
+  margin-right: 20px;
+}
+.topBox2 th {
+  width: 185px;
+}

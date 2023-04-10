@@ -49,7 +49,7 @@ function SoldItems(props){
             <table className="soldItemsTable">
                 <thead>
                     <tr>
-                        <th>Sold Price</th>
+                        <th>Sold For:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@ function SoldItems(props){
                             //if item has been entered, render a label with its value
                                 <td><label>{row.column1}</label></td>
                             ) : (
-                            //if the item hasnt been entered it should still be an inout field
+                            //if the item hasnt been entered it should still be an entry field
                             <td><input 
                                 type="text" 
                                 value={row.column1}
