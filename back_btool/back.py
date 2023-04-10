@@ -9,7 +9,7 @@ html = ""
 
 def create_table():
     global html
-    html = "<table><thead><tr><th>Name</th><th>date</th><th>price</th></tr></thead><tbody>"
+    html = "<table><thead><tr><th>Name</th><th>Date</th><th>Price</th></tr></thead><tbody>"
     for entry in entriesList:
         html += f"<tr><td>{entry['name']}</td><td>{entry['dateBought']}</td><td>{entry['price']}</td></tr>"
     html += "</tbody></table>"

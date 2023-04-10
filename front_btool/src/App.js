@@ -15,10 +15,12 @@ function App() {
   return (
     <div>
       <Header />
-      <div className='EntryStyle'>
-        <Entry addEntryChange ={addEntryChange} />
+      <div className='topBox'>
+        <div className='EntryStyle'>
+          <Entry addEntryChange ={addEntryChange} />
+        </div>
+          <Table entriesChange={entriesChange}/>
       </div>
-      <Table entriesChange={entriesChange}/>
     </div>
     
   );

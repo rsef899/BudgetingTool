@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './Functionality.css';
 
 function Table(props){
     const [tableHtml, setTableHtml] = useState("");
@@ -11,6 +12,6 @@ function Table(props){
       }, [props.entriesChange]);
     return(
         /* This renders the string as an html command*/
-        <div dangerouslySetInnerHTML={{ __html: tableHtml }}></div>);
+        <div dangerouslySetInnerHTML={{ __html: tableHtml }} className="itemsTable"></div>);
 }
 export default Table;
