@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 function SoldItems(props){
+
     const [rows, setRows] = useState([]);
-    
+
     function addRow(newRows){
         setRows([...rows, newRows]);
     }
 
     useEffect(() => {
-        if (props.entriesChange) {
+        if (props.prop1) {
           setRows([...rows, {}]);
         }
-      }, [props.entriesChange]);
+      }, [props.prop1]);
 
         // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
         if (event.keyCode === 13) {
+            props.prop2();
             //create the entry box after every entry is added
             const updatedRows = [...rows];
             //declating isEnterd
@@ -52,7 +54,7 @@ function SoldItems(props){
 
     return(
         <div>
-            {props.entriesChange ? (
+            {props.prop1 ? (
                 <table className="soldItemsTable">
                 <thead>
                     <tr>

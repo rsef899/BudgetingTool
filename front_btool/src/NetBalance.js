@@ -11,7 +11,7 @@ function NetBalance(props){
         .then(data => setNetBalanceHeader(data.netBalance))
         .catch(error => console.error(error));
 
-    }, [props.entriesChange]);
+    }, [props.pressedEnter]);
     return(
         <h1>{netBalanceHeader}</h1>
     );

@@ -49,8 +49,6 @@ def recieve_sale_item():
     data = request.json
     global saleItemsDictionary
     saleItemsDictionary[str(data['itemNumber'])] = data['enteredValue']
-    print("the sale item added is: " + saleItemsDictionary[str(data['itemNumber'])])
-
     return {'message': 'Data recieved succesfully'}
 
 #get the net balance of the items
@@ -61,9 +59,10 @@ def get_netBalance():
     soldSum = 0
     print(str(entriesList))
 
-    # for itemIndex, item in enumerate(entriesList):
-    #     boughtSum += int(item['price'])
-    #     soldSum += int(saleItems[itemIndex])
+    for itemIndex, item in enumerate(entriesList):
+        boughtSum += int(item['price'])
+        print("the current sold items list is: " + str(saleItemsDictionary))
+        soldSum += int(saleItemsDictionary[str(itemIndex)])
         
     netBalance = soldSum - boughtSum
     print("\n")

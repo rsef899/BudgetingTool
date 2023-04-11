@@ -14,6 +14,13 @@ function App() {
   const addEntryChange = (entry) => {
     setEntriesChange((prevState) => prevState + 1);
   };
+  //pressed enter state
+  const [pressedEnter, setPressedEnter] = useState(0);
+
+  //function to detect enter pressed
+  const addEnterPressedChange = (entry) => {
+      setPressedEnter((prevState) => prevState + 1);
+  };
 
   //table will reset when page is refreshed
   useEffect(() => {
@@ -38,12 +45,12 @@ function App() {
             //only one componant can be returned in a ternery operator hence <>, allows both to render 
             <>
               <Table entriesChange={entriesChange}/>
-              <SoldItems entriesChange={entriesChange}/>
+              <SoldItems prop1={entriesChange} prop2={addEnterPressedChange} />
             </>
           )}
         </div>
       </div>
-      <NetBalance entriesChange={entriesChange}/>
+      <NetBalance pressedEnter={pressedEnter}/>
     </div>
     
   );
