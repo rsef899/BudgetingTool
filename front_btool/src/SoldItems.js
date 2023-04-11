@@ -22,15 +22,21 @@ function SoldItems(props){
             updatedRows[index].isEntered = true;
             setRows(updatedRows);
             console.log("Enter pressed in input at index", index);
+
             
             // send POST request to backend file with the entered value
             const enteredValue = event.target.value;
+            const soldItemsData = {
+                itemNumber : index,
+                enteredValue: enteredValue
+            };
+        
             fetch('http://localhost:5000/api/recieve_sale_item', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify({ enteredValue })
+              body: JSON.stringify(soldItemsData)
             })
             .then(response => response.json())
             .then(data => {

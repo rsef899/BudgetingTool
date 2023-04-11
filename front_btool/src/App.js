@@ -4,6 +4,7 @@ import Header from './Header';
 import Entry from './Entry';
 import Table from './Table';
 import SoldItems from './SoldItems';
+import NetBalance from './NetBalance';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
         </div>
         <div className="topBox2">
           {!entriesChange ? (
-            <h1>Enter an entry to get started</h1>
+            <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>
           ):(
             //only one componant can be returned in a ternery operator hence <>, allows both to render 
             <>
@@ -42,6 +43,7 @@ function App() {
           )}
         </div>
       </div>
+      <NetBalance entriesChange={entriesChange}/>
     </div>
     
   );

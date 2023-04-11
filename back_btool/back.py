@@ -5,7 +5,8 @@ app = Flask(__name__)
 CORS(app)
 
 entriesList = []
-saleItems = []
+saleItemsDictionary = {}
+netBalance = 0
 html = ""
 
 def create_table():
@@ -46,13 +47,31 @@ def reset_table():
 @app.route('/api/recieve_sale_item', methods=['POST'])
 def recieve_sale_item():
     data = request.json
-    global saleItems
-    saleItems.append(data)
-    print("\n")
-    print(str(data['enteredValue']))
-    print("\n")
+    global saleItemsDictionary
+    saleItemsDictionary[str(data['itemNumber'])] = data['enteredValue']
+    print("the sale item added is: " + saleItemsDictionary[str(data['itemNumber'])])
+
     return {'message': 'Data recieved succesfully'}
+
+#get the net balance of the items
+@app.route('/api/get_netBalance', methods=['GET'])
+def get_netBalance():
+    global netBalance
+    boughtSum = 0
+    soldSum = 0
+    print(str(entriesList))
+
+    # for itemIndex, item in enumerate(entriesList):
+    #     boughtSum += int(item['price'])
+    #     soldSum += int(saleItems[itemIndex])
         
+    netBalance = soldSum - boughtSum
+    print("\n")
+    print("$ " + str(netBalance))
+    print("\n")
+
+    return {'netBalance': netBalance}
+    
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
