@@ -128,8 +128,22 @@ input {
   border-radius: 10px;
   border: 2px solid #a1a1a1;
   margin-top: 20px;
-  position: relative;
-  bottom: 300px;
+  position: fixed;
+  bottom: 240px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.NetBalanceDiv label{
+  font-size: 99px;
+  padding-left: 7%;
+}
+
+.netBalancePositive{
+  color: green;
+}
+
+.netBalanceNegative{
+  color: red;
 }
 .veticalBox{
   width: 600px;

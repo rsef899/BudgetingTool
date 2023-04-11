@@ -43,13 +43,19 @@ def get_table():
     #we should return a dictionary that retuns a html string
     return {'table_html': html}
 
-#the table will reset when page refreshed
+#RefreshPage
 @app.route('/api/reset_table', methods=['POST'])
 def reset_table():
     global html
     global entriesList
+    global saleItemsDictionary
+    global tobeEvaled_SoldItemsDic
+    #wipe all the values when refreshed
     html = ""
-    entriesList = []
+    entriesList.clear()
+    saleItemsDictionary.clear()
+    tobeEvaled_SoldItemsDic.clear()
+
     return jsonify(success=True)
 
 #getting the sale value

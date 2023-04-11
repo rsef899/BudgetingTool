@@ -11,8 +11,13 @@ function NetBalance(props){
         .catch(error => console.error(error));
 
     }, [props.pressedEnter, props.entriesChange]);
+
+    const netBalanceClass = netBalanceHeader < 0 ? 'netBalanceNegative' : 'netBalancePositive';
     return(
-        <h1>Balance: {netBalanceHeader}</h1>
+        <>
+            <h1>Balance:</h1>
+            <label className={netBalanceClass}>{netBalanceHeader}$</label>
+        </>
     );
 }
 export default NetBalance;
