@@ -5,6 +5,7 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   margin: 0 auto;
+  position: relative;
 }
 
 .EntryStyle {
@@ -117,4 +118,23 @@ input {
 }
 .topBox2 th {
   width: 185px;
+}
+
+.NetBalanceDiv{
+  justify-content: flex-start;
+  background-color: rgb(231, 233, 236);
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  border: 2px solid #a1a1a1;
+  margin-top: 20px;
+  position: relative;
+  bottom: 300px;
+}
+.veticalBox{
+  width: 600px;
+  height: fit-content;
+  display: flex;
+  align-items: center; /* Vertically center child elements */
+  justify-content: center;
 }

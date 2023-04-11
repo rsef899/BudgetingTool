@@ -35,8 +35,10 @@ function App() {
     <div>
       <Header />
       <div className='topBox'>
-        <div className='EntryStyle'>
-          <Entry addEntryChange ={addEntryChange} />
+        <div className='veticalBox'>
+         <div className='EntryStyle'>
+           <Entry addEntryChange ={addEntryChange} />
+         </div>
         </div>
         <div className="topBox2">
           {!entriesChange ? (
@@ -49,10 +51,14 @@ function App() {
             </>
           )}
         </div>
-      </div>
-      <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange}/>
+        <div className='veticalBox'>
+          <div className='NetBalanceDiv'>
+            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange}/>
+          </div>
+       </div>
     </div>
-    
+      </div>
+        
   );
 }
 

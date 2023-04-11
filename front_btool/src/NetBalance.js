@@ -12,7 +12,7 @@ function NetBalance(props){
 
     }, [props.pressedEnter, props.entriesChange]);
     return(
-        <h1>{netBalanceHeader}</h1>
+        <h1>Balance: {netBalanceHeader}</h1>
     );
 }
 export default NetBalance;
