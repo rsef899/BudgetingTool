@@ -50,7 +50,9 @@ def reset_table():
     global entriesList
     global saleItemsDictionary
     global tobeEvaled_SoldItemsDic
+    global netBalance
     #wipe all the values when refreshed
+    netBalance = 0
     html = ""
     entriesList.clear()
     saleItemsDictionary.clear()

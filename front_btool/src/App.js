@@ -8,18 +8,23 @@ import NetBalance from './NetBalance';
 
 
 function App() {
+/*******entry Change detection */
   const [entriesChange, setEntriesChange] = useState(0);
-
   //function to add entry
   const addEntryChange = (entry) => {
     setEntriesChange((prevState) => prevState + 1);
   };
-  //pressed enter state
+/*******Submited sales price detection */
   const [pressedEnter, setPressedEnter] = useState(0);
-
   //function to detect enter pressed
   const addEnterPressedChange = (entry) => {
       setPressedEnter((prevState) => prevState + 1);
+  };
+/*******Reset detection */
+  const [hasReset, sethasReset] = useState(0);
+  //function to detect enter pressed
+  const addhasReset = (entry) => {
+    sethasReset((prevState) => prevState + 1);
   };
 
   //table will reset when page is refreshed
@@ -28,6 +33,7 @@ function App() {
       fetch("http://localhost:5000/api/reset_table", {
         method: "POST"
       });
+      addhasReset();
     }
   }, []);
 
@@ -53,7 +59,7 @@ function App() {
         </div>
         <div className='veticalBox'>
           <div className='NetBalanceDiv'>
-            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange}/>
+            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
        </div>
     </div>

@@ -16,6 +16,16 @@
   border-radius: 10px;
   border: 2px solid #a1a1a1;
   margin: 0 auto;
+  font-family: 'Rubik', sans-serif;
+}
+.EntryStyle label {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+.EntryStyle button {
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 form {
