@@ -1,11 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 
 .topBox{
+  justify-content: center;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  margin: 0 auto;
-  position: relative;
+  grid-template-columns: 500px 700px;
+  grid-gap: 30px;
 }
 
 .EntryStyle {
@@ -73,7 +72,9 @@ input {
 }
 
 .topBox2 h1 {
+  text-align: center;
   padding-top: 100px;
+  
 }
 
 /****************entires table css*/
