@@ -88,7 +88,17 @@ def get_netBalance():
     tobeEvaled_SoldItemsDic = changedSoldlist
 
     return {'netBalance': netBalance}
+
+@app.route('/api/get_itemNames', methods=['GET'])
+def get_itemNames():
+    names = []
+
+    for items in entriesList:
+        names.append(items['name'])
     
+    return jsonify({'names': names})
+
+
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

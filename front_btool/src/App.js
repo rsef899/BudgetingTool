@@ -5,6 +5,7 @@ import Entry from './Entry';
 import Table from './Table';
 import SoldItems from './SoldItems';
 import NetBalance from './NetBalance';
+import UpdateInfo from './UpdateInfo';
 
 
 function App() {
@@ -62,7 +63,14 @@ function App() {
             <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
        </div>
+       {entriesChange ? (
+          <UpdateInfo entriesChange={entriesChange}/>
+       ):(
+        null
+       )}
+       
     </div>
+          
       </div>
         
   );
