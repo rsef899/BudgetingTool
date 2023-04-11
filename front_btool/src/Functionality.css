@@ -44,6 +44,11 @@ input {
   justify-content: center;
 }
 
+.topBox2 input {
+  width: 50px;
+  height: 6px;
+}
+
 .topBox2 tr:nth-child(even) {background-color: #f2f2f2;;}
 .topBox2 tr:hover {background-color: #ddd;}
 
@@ -64,7 +69,6 @@ input {
 .itemsTable{
   flex: 1;
 }
-
 .itemsTable table {
   padding-top: 50px;
   padding-left: 20px;
@@ -74,6 +78,10 @@ input {
   text-align: center;
 }
 
+.itemsTable td {
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
 /*Table 1 column widths*/
 .itemsTable th:first-child,
 .itemsTable td:first-child {
@@ -92,6 +100,20 @@ input {
 .soldItemsTable{
   padding-top: 50px;
   margin-right: 20px;
+}
+
+.soldItemsTable td {
+  height: 35px;
+}
+
+.soldItemsTable td label{
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.soldItemsTable td input{
+  padding-top: 12.8px;
+  padding-bottom: 12.8px;
 }
 .topBox2 th {
   width: 185px;
