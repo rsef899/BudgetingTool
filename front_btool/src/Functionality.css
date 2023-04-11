@@ -3,18 +3,16 @@
 .topBox{
   justify-content: center;
   display: grid;
-  grid-template-columns: 500px 700px;
+  grid-template-columns: 600px 500px;
   grid-gap: 30px;
 }
 
 .EntryStyle {
-  justify-content: flex-start;
   background-color: rgb(231, 233, 236);
-  width: 400px;
+  width: 500px;
   height: 300px;
   border-radius: 10px;
   border: 2px solid #a1a1a1;
-  margin: 0 auto;
   font-family: 'Rubik', sans-serif;
 }
 .EntryStyle label {
@@ -44,7 +42,7 @@ input {
 /* ******************* Top container 2 ->>>>>*/
 .topBox2 {
   background-color: rgb(231, 233, 236);
-  width: 700px;
+  width: 470px;
   height: auto;
   border-radius: 10px;
   border: 2px solid #a1a1a1;
@@ -128,13 +126,13 @@ input {
   padding-bottom: 12.8px;
 }
 .topBox2 th {
-  width: 185px;
+  width: 150px;
 }
 
 .NetBalanceDiv{
   justify-content: flex-start;
   background-color: rgb(231, 233, 236);
-  width: 400px;
+  width: 500px;
   height: 200px;
   border-radius: 10px;
   border: 2px solid #a1a1a1;
