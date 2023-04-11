@@ -6,6 +6,7 @@ CORS(app)
 
 entriesList = []
 saleItemsDictionary = {}
+tobeEvaled_SoldItemsDic = {}
 boughtPriceDictionary = {}
 netBalance = 0
 html = ""
@@ -57,6 +58,7 @@ def recieve_sale_item():
     data = request.json
     global saleItemsDictionary
     saleItemsDictionary[str(data['itemNumber'])] = data['enteredValue']
+    tobeEvaled_SoldItemsDic[str(data['itemNumber'])] = data['enteredValue']
     return {'message': 'Data recieved succesfully'}
 
 
@@ -64,16 +66,18 @@ def recieve_sale_item():
 @app.route('/api/get_netBalance', methods=['GET'])
 def get_netBalance():
     global netBalance
-    boughtSum = 0
-    soldSum = 0
-    print(str(entriesList))
+    global tobeEvaled_SoldItemsDic
+    #create a variable that will change, but initialises the same as tobe sold items
+    changedSoldlist = tobeEvaled_SoldItemsDic.copy()
 
-    for soldItems in saleItemsDictionary:
-        netBalance += int(saleItemsDictionary[soldItems])
-
-    print("\n")
-    print("$ " + str(netBalance))
-    print("\n")
+    #go through all the sold items that need to be evaluated
+    for soldItems in tobeEvaled_SoldItemsDic:
+        #add the sold amount to the netBalance
+        netBalance += int(tobeEvaled_SoldItemsDic[soldItems])
+        #remove the evaluated item from the tobeevauated dictionary
+        del changedSoldlist[soldItems]
+    #set the tobeEvaluated official dictionary to the mutable dictionary, should = {}
+    tobeEvaled_SoldItemsDic = changedSoldlist
 
     return {'netBalance': netBalance}
     
