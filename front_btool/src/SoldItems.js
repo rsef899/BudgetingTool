@@ -46,7 +46,8 @@ function SoldItems(props){
 
     return(
         <div>
-            <table className="soldItemsTable">
+            {props.entriesChange ? (
+                <table className="soldItemsTable">
                 <thead>
                     <tr>
                         <th>Sold For:</th>
@@ -71,6 +72,7 @@ function SoldItems(props){
                     ))}
                 </tbody>
             </table>
+            ): null}
         </div>
     );
 }

@@ -8,8 +8,6 @@ import SoldItems from './SoldItems';
 
 function App() {
   const [entriesChange, setEntriesChange] = useState(0);
-  //monitoring refresh
-  const [backendState, setBackendState] = useState(null);
 
   //function to add entry
   const addEntryChange = (entry) => {
@@ -33,8 +31,15 @@ function App() {
           <Entry addEntryChange ={addEntryChange} />
         </div>
         <div className="topBox2">
-          <Table entriesChange={entriesChange}/>
-          <SoldItems entriesChange={entriesChange}/>
+          {!entriesChange ? (
+            <h1>Enter an entry to get started</h1>
+          ):(
+            //only one componant can be returned in a ternery operator hence <>, allows both to render 
+            <>
+              <Table entriesChange={entriesChange}/>
+              <SoldItems entriesChange={entriesChange}/>
+            </>
+          )}
         </div>
       </div>
     </div>

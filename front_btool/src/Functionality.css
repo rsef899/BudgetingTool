@@ -41,6 +41,7 @@ input {
   table-layout: fixed;
   font-family: 'Rubik', sans-serif;
   display: flex;
+  justify-content: center;
 }
 
 .topBox2 tr:nth-child(even) {background-color: #f2f2f2;;}
@@ -55,6 +56,10 @@ input {
   border-radius: 3px;
 }
 
+.topBox2 h1 {
+  padding-top: 100px;
+}
+
 /****************entires table css*/
 .itemsTable{
   flex: 1;
@@ -63,7 +68,7 @@ input {
 .itemsTable table {
   padding-top: 50px;
   padding-left: 20px;
-  width: 100.3%;
+  width: 100.4%;
 }
 .topBox2 table {
   text-align: center;
