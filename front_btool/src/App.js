@@ -50,7 +50,7 @@ function App() {
           )}
         </div>
       </div>
-      <NetBalance pressedEnter={pressedEnter}/>
+      <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange}/>
     </div>
     
   );

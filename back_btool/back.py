@@ -6,6 +6,7 @@ CORS(app)
 
 entriesList = []
 saleItemsDictionary = {}
+boughtPriceDictionary = {}
 netBalance = 0
 html = ""
 
@@ -25,6 +26,13 @@ def add_entry():
     name = data['name']
     date = data['dateBought']
     price = data['price']
+    #add expense to the netBalance
+    global boughtPriceDictionary
+    boughtPriceDictionary[str(len(entriesList)-1)] = price
+    global netBalance 
+    netBalance -= int(price)
+
+
     if (len(entriesList) != 0):
         create_table()
     return {'message': 'Data recieved succesfully'}
@@ -51,6 +59,7 @@ def recieve_sale_item():
     saleItemsDictionary[str(data['itemNumber'])] = data['enteredValue']
     return {'message': 'Data recieved succesfully'}
 
+
 #get the net balance of the items
 @app.route('/api/get_netBalance', methods=['GET'])
 def get_netBalance():
@@ -59,12 +68,9 @@ def get_netBalance():
     soldSum = 0
     print(str(entriesList))
 
-    for itemIndex, item in enumerate(entriesList):
-        boughtSum += int(item['price'])
-        print("the current sold items list is: " + str(saleItemsDictionary))
-        soldSum += int(saleItemsDictionary[str(itemIndex)])
-        
-    netBalance = soldSum - boughtSum
+    for soldItems in saleItemsDictionary:
+        netBalance += int(saleItemsDictionary[soldItems])
+
     print("\n")
     print("$ " + str(netBalance))
     print("\n")

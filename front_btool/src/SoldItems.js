@@ -14,7 +14,7 @@ function SoldItems(props){
         }
       }, [props.prop1]);
 
-        // event listener function for the sold entry boxes
+    // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
         if (event.keyCode === 13) {
             props.prop2();
