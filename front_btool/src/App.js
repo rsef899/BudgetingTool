@@ -42,11 +42,11 @@ function App() {
     <div>
       <Header />
       <div className='topBox'>
-        <div className='veticalBox'>
+        
          <div className='EntryStyle'>
            <Entry addEntryChange ={addEntryChange} />
+         
          </div>
-        </div>
         <div className="topBox2">
           {!entriesChange ? (
             <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
@@ -56,14 +56,14 @@ function App() {
               <SoldItems prop1={entriesChange} prop2={addEnterPressedChange} />
             </>)}
         </div>
-        <div className='veticalBox'>
+        
           <div className='NetBalanceDiv'>
             <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
           <div className='updateDiv'>
             {entriesChange ? (<UpdateInfo entriesChange={entriesChange}/>):(null)}  
           </div>
-        </div>
+        
       </div>
     </div>
        

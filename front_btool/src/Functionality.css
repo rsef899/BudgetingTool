@@ -5,6 +5,7 @@
   display: grid;
   height: 520px;
   grid-template-columns: 600px 500px;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 30px;
 }
 
@@ -151,16 +152,6 @@ input {
 
 .netBalanceNegative{
   color: red;
-}
-.veticalBox{
-  width: 600px;
-  height: 100px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  grid-template-rows: 1fr 1fr 1fr;
-  align-items: center; /* Vertically center child elements */
-  justify-content: center;
 }
 
 .updateDiv{
