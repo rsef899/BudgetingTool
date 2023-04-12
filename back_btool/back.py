@@ -107,7 +107,6 @@ def get_itemDetails_Reciever():
 
     global current_updating_item
     current_updating_item = data['Item']
-    print(str(current_updating_item))
     return {'message': 'Updating Item Name recieved succesfully'}
 
 @app.route('/api/get_itemDetails_Sender', methods=['GET'])
@@ -122,9 +121,6 @@ def get_itemDetails_Sender():
             except KeyError:
                 print('Key does not exist')
     return jsonify({'details': details})
-
-
-
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
