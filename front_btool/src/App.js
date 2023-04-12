@@ -49,30 +49,27 @@ function App() {
         </div>
         <div className="topBox2">
           {!entriesChange ? (
-            <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>
-          ):(
+            <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
             //only one componant can be returned in a ternery operator hence <>, allows both to render 
             <>
               <Table entriesChange={entriesChange}/>
               <SoldItems prop1={entriesChange} prop2={addEnterPressedChange} />
-            </>
-          )}
+            </>)}
         </div>
         <div className='veticalBox'>
           <div className='NetBalanceDiv'>
             <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
-       </div>
-       {entriesChange ? (
-          <UpdateInfo entriesChange={entriesChange}/>
-       ):(
-        null
-       )}
-       
-    </div>
-          
+          <div className='updateDiv'>
+            {entriesChange ? (<UpdateInfo entriesChange={entriesChange}/>):(null)}  
+          </div>
+        </div>
       </div>
-        
+    </div>
+       
+          
+           
+      
   );
 }
 

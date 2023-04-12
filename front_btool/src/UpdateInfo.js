@@ -12,11 +12,15 @@ function UpdateInfo(props){
     }, [props.entriesChange]);
 
     return (
-        <select>
+        <>
+        <label for="nameDropdown">Item Name:</label>
+        <select className="nameDropdown">
             {nameOptions.map(option => (
                 <option key={option}>{option}</option>
             ))}
         </select>
+        </>
+
     );
 }
 export default UpdateInfo

@@ -3,6 +3,7 @@
 .topBox{
   justify-content: center;
   display: grid;
+  height: 520px;
   grid-template-columns: 600px 500px;
   grid-gap: 30px;
 }
@@ -130,15 +131,12 @@ input {
 }
 
 .NetBalanceDiv{
-  justify-content: flex-start;
+  position: sticky;
   background-color: rgb(231, 233, 236);
   width: 500px;
   height: 200px;
   border-radius: 10px;
   border: 2px solid #a1a1a1;
-  margin-top: 20px;
-  position: fixed;
-  bottom: 240px;
   font-family: 'Rubik', sans-serif;
 }
 
@@ -156,8 +154,20 @@ input {
 }
 .veticalBox{
   width: 600px;
-  height: fit-content;
-  display: flex;
+  height: 100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  grid-template-rows: 1fr 1fr 1fr;
   align-items: center; /* Vertically center child elements */
   justify-content: center;
+}
+
+.updateDiv{
+ width: 500px;
+ height: 200px;
+ border-radius: 10px;
+ background-color: rgb(231, 233, 236);
+ border: 2px solid #a1a1a1;
+ font-family: 'Rubik', sans-serif;
 }
