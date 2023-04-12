@@ -11,6 +11,8 @@ boughtPriceDictionary = {}
 netBalance = 0
 html = ""
 
+current_updating_item = ''
+
 def create_table():
     global html
     html = "<table><thead><tr><th>Name</th><th>Date</th><th>Price</th></tr></thead><tbody>"
@@ -51,9 +53,11 @@ def reset_table():
     global saleItemsDictionary
     global tobeEvaled_SoldItemsDic
     global netBalance
+    global current_updating_item
     #wipe all the values when refreshed
     netBalance = 0
     html = ""
+    current_updating_item = ""
     entriesList.clear()
     saleItemsDictionary.clear()
     tobeEvaled_SoldItemsDic.clear()
@@ -92,11 +96,34 @@ def get_netBalance():
 @app.route('/api/get_itemNames', methods=['GET'])
 def get_itemNames():
     names = []
-
     for items in entriesList:
         names.append(items['name'])
     
     return jsonify({'names': names})
+
+@app.route('/api/get_itemDetails_Reciever', methods=['POST'])
+def get_itemDetails_Reciever():
+    data = request.json
+
+    global current_updating_item
+    current_updating_item = data['Item']
+    print(str(current_updating_item))
+    return {'message': 'Updating Item Name recieved succesfully'}
+
+@app.route('/api/get_itemDetails_Sender', methods=['GET'])
+def get_itemDetails_Sender():
+    details = ['Name', 'Date', 'Price']
+    
+    for index, items in enumerate(entriesList):
+        if items['name'] == current_updating_item:
+            try:
+                if str(index) in saleItemsDictionary:
+                    details.append('Sold Price')
+            except KeyError:
+                print('Key does not exist')
+    return jsonify({'details': details})
+
+
 
 
 #only run the application when the file is executed dierectly

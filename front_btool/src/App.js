@@ -63,7 +63,6 @@ function App() {
           <div className='updateDiv'>
             {entriesChange ? (<UpdateInfo entriesChange={entriesChange}/>):(null)}  
           </div>
-        
       </div>
     </div>
        
