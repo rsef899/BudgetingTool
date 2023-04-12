@@ -25,13 +25,10 @@ function EntryForm(props) {
         })
         .then(response => response.json())
         .then((data) => {
-            console.log(data)
             //update the entries counter
             props.addEntryChange();
         })
         .catch(error => console.error(error));
-
-        console.log({ name, dateBought, price})
     };
 
     return (

@@ -28,15 +28,15 @@ function App() {
     sethasReset((prevState) => prevState + 1);
   };
 
-  //table will reset when page is refreshed
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      fetch("http://localhost:5000/api/reset_table", {
-        method: "POST"
-      });
-      addhasReset();
-    }
-  }, []);
+  // //table will reset when page is refreshed
+  // useEffect(() => {
+  //   window.onbeforeunload = () => {
+  //     fetch("http://localhost:5000/api/reset_table", {
+  //       method: "POST"
+  //     });
+  //     addhasReset();
+  //   }
+  // }, []);
 
   return (
     <div>

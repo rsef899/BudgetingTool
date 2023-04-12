@@ -90,7 +90,7 @@ def get_netBalance():
         del changedSoldlist[soldItems]
     #set the tobeEvaluated official dictionary to the mutable dictionary, should = {}
     tobeEvaled_SoldItemsDic = changedSoldlist
-
+    print("from net:: entries list after:  " + str(entriesList))
     return {'netBalance': netBalance}
 
 @app.route('/api/get_itemNames', methods=['GET'])
@@ -109,6 +109,7 @@ def get_itemDetails_Reciever():
     current_updating_item = data['Item']
     return {'message': 'Updating Item Name recieved succesfully'}
 
+#send the details list, for detail update selection
 @app.route('/api/get_itemDetails_Sender', methods=['GET'])
 def get_itemDetails_Sender():
     details = ['Name', 'Date', 'Price']
@@ -121,6 +122,39 @@ def get_itemDetails_Sender():
             except KeyError:
                 print('Key does not exist')
     return jsonify({'details': details})
+
+@app.route('/api/update_detail', methods=['POST'])
+def update_detail():
+    global saleItemsDictionary
+    global entriesList
+    data = request.json
+    if (data['detail'] == "Name"):
+        data['detail'] = "name"
+    elif (data['detail'] == "Price"):
+        data['detail'] = "price"
+    else:
+        data['detail'] = "dateBought"
+
+    
+    print("We are sending  " + str(data))
+    print("entries list currently:  " + str(entriesList))
+
+    if (data['detail'] == 'Sold Price'):
+        for index, items in enumerate(entriesList):
+            if items['name'] == data['name']:
+                try:
+                    if str(index) in saleItemsDictionary:
+                        saleItemsDictionary[str(index)] = data['entry']
+                except KeyError:
+                    print('Key does not exist')
+    else:
+        for index2, entry in enumerate(entriesList):
+            if entry['name'] == data['name']:
+                entriesList[index2][data['detail']] = data['entry']
+
+    print("entries list after:  " + str(entriesList))
+    return {'message': 'Succesfully Updated'}
+
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
