@@ -62,11 +62,14 @@ function UpdateInfo(props){
     }
     //last step: send
     const handleUpdateSend = (event) => {
+        event.preventDefault();
         fetch('http://localhost:5000/api/update_detail',{
             // post method is used to send data to the server
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Max-Age': '3600',
+                'Access-Control-Request-Headers': 'content-type'
             },
             body: JSON.stringify(sendUpdateData)
         }).then(response => response.json())

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
@@ -90,7 +90,6 @@ def get_netBalance():
         del changedSoldlist[soldItems]
     #set the tobeEvaluated official dictionary to the mutable dictionary, should = {}
     tobeEvaled_SoldItemsDic = changedSoldlist
-    print("from net:: entries list after:  " + str(entriesList))
     return {'netBalance': netBalance}
 
 @app.route('/api/get_itemNames', methods=['GET'])
@@ -123,6 +122,7 @@ def get_itemDetails_Sender():
                 print('Key does not exist')
     return jsonify({'details': details})
 
+@cross_origin()
 @app.route('/api/update_detail', methods=['POST'])
 def update_detail():
     global saleItemsDictionary
@@ -135,8 +135,9 @@ def update_detail():
     else:
         data['detail'] = "dateBought"
 
-    
+    print("\n")
     print("We are sending  " + str(data))
+    print("\n")
     print("entries list currently:  " + str(entriesList))
 
     if (data['detail'] == 'Sold Price'):
@@ -151,9 +152,16 @@ def update_detail():
         for index2, entry in enumerate(entriesList):
             if entry['name'] == data['name']:
                 entriesList[index2][data['detail']] = data['entry']
-
+    print("\n")
     print("entries list after:  " + str(entriesList))
     return {'message': 'Succesfully Updated'}
+
+#asure that our header are matching those of the back end
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Max-Age', '3600')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+    return response
 
 
 #only run the application when the file is executed dierectly
