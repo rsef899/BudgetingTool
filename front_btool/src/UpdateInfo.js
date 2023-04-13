@@ -10,6 +10,11 @@ function UpdateInfo(props){
     //details selection
     const [selectedDetails, setSelectedDetails] = useState('');
 
+    const [isOptionDisabled, setIsOptionDisabled] = useState(true);
+
+    const [allowDefault, setallowDefault] = useState(0);
+    const [defaultOption, setDefaultOption] = useState('');
+
     console.log("the current item selected is " + selectedName)
     
     useEffect(() => {
@@ -18,6 +23,15 @@ function UpdateInfo(props){
         .then(data => setNameOptions(data.names))
         .catch(error => console.error(error));
     }, [props.entriesChange, props.pressedEnter, props.entryUpdated]);
+
+    console.log("is the blocker allowed? " + allowDefault)
+    //bring down default option
+    useEffect(() => {
+        if (allowDefault == 1){
+            setIsOptionDisabled(false)
+            setDefaultOption('defaultOptionValue');
+        }
+    }, [allowDefault]);
 
     //this is what are sending for the details list
     const sendItemSelected = {
@@ -43,10 +57,13 @@ function UpdateInfo(props){
     }, [selectedName, props.pressedEnter]);
 
     const handleNameChange = (event) => {
+        setDefaultOption(selectedName)
         setSelectedName(event.target.value)
+        setallowDefault(0)
     }
 
     const handleDetailChange = (event) => {
+        setDefaultOption(selectedName)
         setSelectedDetails(event.target.value)
     }
 
@@ -82,6 +99,7 @@ function UpdateInfo(props){
                 //set the sold items row index
                 props.setupdatedSoldIndex(parseInt(data.UpdateIndex));
             }
+            setallowDefault(1);
         })
         .catch(error => console.error(error));
         props.updateEntryLog();
@@ -92,8 +110,8 @@ function UpdateInfo(props){
         <div>
         {/*select item to edit drop down*/}
         <label htmlFor="nameDropdown">Item Name:</label>
-        <select className="nameDropdown" onChange={handleNameChange}>
-            <option disabled selected value= "">Select an Option</option>
+        <select className="nameDropdown" onChange={handleNameChange} value={isOptionDisabled ? defaultOption : selectedName}>
+            <option disabled={isOptionDisabled} selected value="">Select an Option</option>
             {nameOptions.map(option => (
             <option key={option}>{option}</option>
             ))}
@@ -102,8 +120,8 @@ function UpdateInfo(props){
         {detailsOptions != '' ? (
             <>
             <label htmlFor="detailsDropdown">Detail:</label>
-            <select className="detailsDropdown" onChange={handleDetailChange}>
-                <option disabled selected value= "">Select an Option</option>
+            <select className="detailsDropdown" onChange={handleDetailChange} value={isOptionDisabled ? defaultOption : selectedName}>
+                <option disabled={isOptionDisabled} selected value="">Select an Option</option>
                 {detailsOptions.map(option => (
                 <option key={option}>{option}</option>
                 ))}
