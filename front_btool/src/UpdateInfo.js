@@ -74,6 +74,7 @@ function UpdateInfo(props){
             body: JSON.stringify(sendUpdateData)
         }).then(response => response.json())
         .catch(error => console.error(error));
+        props.addEntryChange();
     }
 
 
@@ -82,6 +83,7 @@ function UpdateInfo(props){
         {/*select item to edit drop down*/}
         <label htmlFor="nameDropdown">Item Name:</label>
         <select className="nameDropdown" onChange={handleNameChange}>
+            <option disabled selected value= "">Select an Option</option>
             {nameOptions.map(option => (
             <option key={option}>{option}</option>
             ))}
@@ -91,6 +93,7 @@ function UpdateInfo(props){
             <>
             <label htmlFor="detailsDropdown">Detail:</label>
             <select className="detailsDropdown" onChange={handleDetailChange}>
+                <option disabled selected value= "">Select an Option</option>
                 {detailsOptions.map(option => (
                 <option key={option}>{option}</option>
                 ))}

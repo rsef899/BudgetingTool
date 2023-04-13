@@ -61,7 +61,7 @@ function App() {
             <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
           <div className='updateDiv'>
-            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} />):(null)}  
+            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} addEntryChange={addEntryChange}/>):(null)}  
           </div>
       </div>
     </div>

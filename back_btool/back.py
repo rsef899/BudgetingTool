@@ -135,11 +135,6 @@ def update_detail():
     else:
         data['detail'] = "dateBought"
 
-    print("\n")
-    print("We are sending  " + str(data))
-    print("\n")
-    print("entries list currently:  " + str(entriesList))
-
     if (data['detail'] == 'Sold Price'):
         for index, items in enumerate(entriesList):
             if items['name'] == data['name']:
@@ -153,7 +148,15 @@ def update_detail():
             if entry['name'] == data['name']:
                 entriesList[index2][data['detail']] = data['entry']
     print("\n")
-    print("entries list after:  " + str(entriesList))
+    print("html before:  " + str(html))
+    print("entry name before " + entriesList[0]['name'])
+    print(str(data))
+    print("entriesList bef: " + str(entriesList))
+    create_table()
+    print("\n")
+    print("html after:  " + str(html))
+    print("entry name after " + entriesList[0]['name'])
+    print("entriesList after: " + str(entriesList))
     return {'message': 'Succesfully Updated'}
 
 #asure that our header are matching those of the back end
