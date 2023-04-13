@@ -18,6 +18,7 @@ function SoldItems(props){
     useEffect(() => {
         //only updae, if the flag has been set
         if (props.updateSoldFlag == 1){
+            console.log("this shouldnt coem up, the value of the flag is: " + props.updateSoldFlag)
             //must get the most recent rows data
             setRows(prevRows => {
                 const updatedRows = [...prevRows];

@@ -70,11 +70,12 @@ function App() {
         </div>
         
           <div className='NetBalanceDiv'>
-            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
+            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} updateSoldFlag={updateSoldFlag}/>
           </div>
           <div className='updateDiv'>
             {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
-            setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} setChangedDetail={setChangedDetail} changedDetail={changedDetail} />):(null)}  
+            setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} setChangedDetail={setChangedDetail} changedDetail={changedDetail} 
+            entryUpdated={entryUpdated} />):(null)}  
           </div>
       </div>
     </div>

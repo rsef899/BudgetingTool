@@ -10,7 +10,7 @@ function NetBalance(props){
         .then(data => setNetBalanceHeader(data.netBalance))
         .catch(error => console.error(error));
 
-    }, [props.pressedEnter, props.entriesChange, props.hasReset]);
+    }, [props.pressedEnter, props.entriesChange, props.hasReset, props.updateSoldFlag]);
 
     const netBalanceClass = netBalanceHeader < 0 ? 'netBalanceNegative' : 'netBalancePositive';
     return(

@@ -10,13 +10,14 @@ function UpdateInfo(props){
     //details selection
     const [selectedDetails, setSelectedDetails] = useState('');
 
+    console.log("the current item selected is " + selectedName)
     
     useEffect(() => {
         fetch("http://localhost:5000/api/get_itemNames")
         .then(response => response.json())
         .then(data => setNameOptions(data.names))
         .catch(error => console.error(error));
-    }, [props.entriesChange, props.pressedEnter]);
+    }, [props.entriesChange, props.pressedEnter, props.entryUpdated]);
 
     //this is what are sending for the details list
     const sendItemSelected = {
@@ -73,10 +74,11 @@ function UpdateInfo(props){
             body: JSON.stringify(sendUpdateData)
         }).then(response => response.json())
         .then(data => {
-            //set the flag to change the label
-            props.setupdateSoldFlag(1)
             //only do this if we are udating the sold item entry
             if (data['UpdateIndex'] != undefined){
+                //set the flag to change the label
+                props.setupdateSoldFlag(1)
+                console.log("this shouldnt coem up")
                 //set the sold items row index
                 props.setupdatedSoldIndex(parseInt(data.UpdateIndex));
             }
@@ -84,7 +86,7 @@ function UpdateInfo(props){
         .catch(error => console.error(error));
         props.updateEntryLog();
     }
-
+    console.log("selected deatils is: " + selectedDetails)
 
     return (
         <div>

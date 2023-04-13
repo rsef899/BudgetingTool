@@ -15,6 +15,8 @@ current_updating_item = ''
 
 def create_table():
     global html
+    global entriesList
+    print(str(entriesList))
     html = "<table><thead><tr><th>Name</th><th>Date</th><th>Price</th></tr></thead><tbody>"
     for entry in entriesList:
         html += f"<tr><td>{entry['name']}</td><td>{entry['dateBought']}</td><td>{entry['price']}</td></tr>"
@@ -43,6 +45,7 @@ def add_entry():
 @app.route('/api/get_table', methods=['GET'])
 def get_table():
     #we should return a dictionary that retuns a html string
+    create_table()
     return {'table_html': html}
 
 #RefreshPage
@@ -79,6 +82,7 @@ def recieve_sale_item():
 def get_netBalance():
     global netBalance
     global tobeEvaled_SoldItemsDic
+
     #create a variable that will change, but initialises the same as tobe sold items
     changedSoldlist = tobeEvaled_SoldItemsDic.copy()
 
@@ -127,6 +131,9 @@ def get_itemDetails_Sender():
 def update_detail():
     global saleItemsDictionary
     global entriesList
+    global tobeEvaled_SoldItemsDic
+    global netBalance
+
     data = request.json
     if (data['detail'] == "Name"):
         data['detail'] = "name"
@@ -134,22 +141,25 @@ def update_detail():
         data['detail'] = "price"
     elif (data['detail'] == "Date"):
         data['detail'] = "dateBought"
-
+    print("the detail being changed is: " + data['detail'])
     if (data['detail'] == 'Sold Price'):
         for index, items in enumerate(entriesList):
             if items['name'] == data['name']:
                 try:
                     if str(index) in saleItemsDictionary:
+                        #we must undo teh previous sale cost
+                        netBalance -= int(saleItemsDictionary[str(index)])
                         saleItemsDictionary[str(index)] = data['entry']
+                        tobeEvaled_SoldItemsDic[str(index)] = data['entry']
                         return {"UpdateIndex" : index}
                 except KeyError:
                     print('Key does not exist')
                 
-
     else:
         for index2, entry in enumerate(entriesList):
             if entry['name'] == data['name']:
                 entriesList[index2][data['detail']] = data['entry']
+                print(str(entriesList))
 
     return {'message': 'Succesfully Updated'}
 
