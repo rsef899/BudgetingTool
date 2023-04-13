@@ -33,6 +33,11 @@ function App() {
   const updateEntryLog = (entry) => {
     setEntryUpdated((prevState) => prevState + 1);
   };
+  //*********Updating sold table state variables */
+  const [updateSoldFlag, setupdateSoldFlag] = useState(0);
+  const [updatedSoldIndex, setupdatedSoldIndex] = useState(0);
+  //changed detail
+  const [changedDetail, setChangedDetail] = useState('');
 
   //table will reset when page is refreshed
   useEffect(() => {
@@ -59,7 +64,8 @@ function App() {
             //only one componant can be returned in a ternery operator hence <>, allows both to render 
             <>
               <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
-              <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} />
+              <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} 
+              updateSoldFlag={updateSoldFlag} setupdateSoldFlag={setupdateSoldFlag} updatedSoldIndex={updatedSoldIndex} changedDetail={changedDetail} />
             </>)}
         </div>
         
@@ -67,7 +73,8 @@ function App() {
             <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
           <div className='updateDiv'>
-            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}/>):(null)}  
+            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
+            setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} setChangedDetail={setChangedDetail} changedDetail={changedDetail} />):(null)}  
           </div>
       </div>
     </div>

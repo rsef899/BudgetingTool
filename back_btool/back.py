@@ -141,8 +141,11 @@ def update_detail():
                 try:
                     if str(index) in saleItemsDictionary:
                         saleItemsDictionary[str(index)] = data['entry']
+                        return {"UpdateIndex" : index}
                 except KeyError:
                     print('Key does not exist')
+                
+
     else:
         for index2, entry in enumerate(entriesList):
             if entry['name'] == data['name']:

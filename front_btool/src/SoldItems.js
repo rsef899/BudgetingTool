@@ -14,14 +14,31 @@ function SoldItems(props){
         }
       }, [props.entriesChange]);
 
+    //Update the sold for label everytime the sold for detail is updated
+    useEffect(() => {
+        //only updae, if the flag has been set
+        if (props.updateSoldFlag == 1){
+            //must get the most recent rows data
+            setRows(prevRows => {
+                const updatedRows = [...prevRows];
+                //change the value to the changed detail
+                updatedRows[props.updatedSoldIndex].column1 = props.changedDetail;
+                return updatedRows;
+              }); 
+              //reset the flag
+              props.setupdateSoldFlag(0)
+        }
+    }, [props.updateSoldFlag])
+
     // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
         if (event.keyCode === 13) {
             props.prop2();
-            //create the entry box after every entry is added
+            //create a copy of the current rows to use
             const updatedRows = [...rows];
-            //declating isEnterd
+            //declaring isEnterd to change to labels
             updatedRows[index].isEntered = true;
+            //seeting to new rows
             setRows(updatedRows);
             console.log("Enter pressed in input at index", index);
 

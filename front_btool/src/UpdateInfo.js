@@ -9,8 +9,7 @@ function UpdateInfo(props){
     const [detailsOptions, setDetailsOptions] = useState([]);
     //details selection
     const [selectedDetails, setSelectedDetails] = useState('');
-    //changed detail
-    const [changedDetail, setChangedDetail] = useState('');
+
     
     useEffect(() => {
         fetch("http://localhost:5000/api/get_itemNames")
@@ -52,13 +51,13 @@ function UpdateInfo(props){
 
     //get the entry from the user #onchange
     const handleUpdateGet = (event) => {
-     setChangedDetail(event.target.value)  
+     props.setChangedDetail(event.target.value)  
     }
     //send the entry
     const sendUpdateData = {
         name: selectedName,
         detail: selectedDetails,
-        entry: changedDetail
+        entry: props.changedDetail
     }
     //last step: send
     const handleUpdateSend = (event) => {
@@ -73,6 +72,15 @@ function UpdateInfo(props){
             },
             body: JSON.stringify(sendUpdateData)
         }).then(response => response.json())
+        .then(data => {
+            //set the flag to change the label
+            props.setupdateSoldFlag(1)
+            //only do this if we are udating the sold item entry
+            if (data['UpdateIndex'] != undefined){
+                //set the sold items row index
+                props.setupdatedSoldIndex(parseInt(data.UpdateIndex));
+            }
+        })
         .catch(error => console.error(error));
         props.updateEntryLog();
     }
@@ -102,7 +110,7 @@ function UpdateInfo(props){
         ) : null}
         {detailsOptions != '' ? (
             <form onSubmit={handleUpdateSend}>
-            <input type="text" value={changedDetail} onChange={handleUpdateGet} />
+            <input type="text" value={props.changedDetail} onChange={handleUpdateGet} />
             <button type="submit">Submit</button>
           </form>
         ):null}
