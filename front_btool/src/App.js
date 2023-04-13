@@ -27,6 +27,12 @@ function App() {
   const addhasReset = (entry) => {
     sethasReset((prevState) => prevState + 1);
   };
+  /*******Submited Update tableUpdate */
+  const [entryUpdated, setEntryUpdated] = useState(0);
+  //function to detect enter pressed
+  const updateEntryLog = (entry) => {
+    setEntryUpdated((prevState) => prevState + 1);
+  };
 
   //table will reset when page is refreshed
   useEffect(() => {
@@ -52,8 +58,8 @@ function App() {
             <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
             //only one componant can be returned in a ternery operator hence <>, allows both to render 
             <>
-              <Table entriesChange={entriesChange}/>
-              <SoldItems prop1={entriesChange} prop2={addEnterPressedChange} />
+              <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
+              <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} />
             </>)}
         </div>
         
@@ -61,7 +67,7 @@ function App() {
             <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset}/>
           </div>
           <div className='updateDiv'>
-            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} addEntryChange={addEntryChange}/>):(null)}  
+            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}/>):(null)}  
           </div>
       </div>
     </div>

@@ -74,7 +74,7 @@ function UpdateInfo(props){
             body: JSON.stringify(sendUpdateData)
         }).then(response => response.json())
         .catch(error => console.error(error));
-        props.addEntryChange();
+        props.updateEntryLog();
     }
 
 

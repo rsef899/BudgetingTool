@@ -9,7 +9,7 @@ function Table(props){
           .then(response => response.json())
           .then(data => setTableHtml(data.table_html))
           .catch(error => console.error(error));
-      }, [props.entriesChange]);
+      }, [props.entriesChange, props.entryUpdated]);
     return(
         /* This renders the string as an html command*/
         <div dangerouslySetInnerHTML={{ __html: tableHtml }} className="itemsTable"></div>

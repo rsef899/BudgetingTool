@@ -9,10 +9,10 @@ function SoldItems(props){
     }
 
     useEffect(() => {
-        if (props.prop1) {
+        if (props.entriesChange) {
           setRows([...rows, {}]);
         }
-      }, [props.prop1]);
+      }, [props.entriesChange]);
 
     // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
@@ -54,7 +54,7 @@ function SoldItems(props){
 
     return(
         <div>
-            {props.prop1 ? (
+            {props.entriesChange ? (
                 <table className="soldItemsTable">
                 <thead>
                     <tr>
