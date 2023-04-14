@@ -1,11 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 
+.main-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 15px;
+  max-width: 60vw;
+  margin: 0 auto;
+}
+
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-gap: 10px;
-    max-width: 80vw;
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px 200px 200px;
+    grid-gap: 15px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .grid-container-mover{
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    max-width: auto;
+    max-height: auto;
   }
   
   /****************** Entry Div*/
@@ -47,8 +65,7 @@
   
 /****************** net-balance div*/
   .net-balance-div {
-    grid-row: 2 / 3;
-    grid-column: 1 / 2;
+
     /*non grid styling*/
     background-color: rgb(231, 233, 236);
     width: 500px;
@@ -92,12 +109,14 @@
     /*non grid styling*/
     background-color: rgb(231, 233, 236);
     width: 470px;
+    min-height: 300px;
     height: auto;
     border-radius: 10px;
     border: 2px solid #a1a1a1;
     font-family: 'Rubik', sans-serif;
     display: flex;
-    align-items: flex-start
+    align-items: flex-start;
+    align-self: flex-start;
   }
 
   .entire-top-table-div input {
