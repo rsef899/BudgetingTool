@@ -70,7 +70,8 @@ function App() {
         </div>
         
           <div className='NetBalanceDiv'>
-            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} updateSoldFlag={updateSoldFlag}/>
+            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
+            updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
           </div>
           <div className='updateDiv'>
             {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}

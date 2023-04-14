@@ -18,10 +18,7 @@ function UpdateInfo(props){
     const [allowDefault, setallowDefault] = useState(0);
     const [defaultOption, setDefaultOption] = useState('');
 
-    //console log teh selected values
-    console.log("the current item selected in name DD is " + selectedName)
-    console.log("the current detail selected in details DD is " + selectedDetails)
-    
+
     useEffect(() => {
         fetch("http://localhost:5000/api/get_itemNames")
         .then(response => response.json())
@@ -77,6 +74,10 @@ function UpdateInfo(props){
 
     //get the entry from the user #onchange
     const handleUpdateGet = (event) => {
+        //console log teh selected values
+        console.log("the current item selected in name DD is " + selectedName)
+        console.log("the current detail selected in details DD is " + selectedDetails)
+        //get the entry value
         props.setChangedDetail(event.target.value)  
     }
     //send the entry

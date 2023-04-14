@@ -158,6 +158,10 @@ def update_detail():
     else:
         for index2, entry in enumerate(entriesList):
             if entry['name'] == data['name']:
+                if (data['detail'] == 'price'):
+                    netBalance += int(entriesList[index2]['price'])
+                    netBalance -= int(data['entry'])
+
                 entriesList[index2][data['detail']] = data['entry']
                 print(str(entriesList))
 
