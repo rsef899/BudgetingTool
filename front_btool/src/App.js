@@ -51,39 +51,37 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <div className='topBox'>
-        
-         <div className='EntryStyle'>
-           <Entry addEntryChange ={addEntryChange} />
-         
-         </div>
-        <div className="topBox2">
-          {!entriesChange ? (
-            <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
-            //only one componant can be returned in a ternery operator hence <>, allows both to render 
-            <>
-              <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
-              <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} 
-              updateSoldFlag={updateSoldFlag} setupdateSoldFlag={setupdateSoldFlag} updatedSoldIndex={updatedSoldIndex} changedDetail={changedDetail} />
-            </>)}
-        </div>
-        
-          <div className='NetBalanceDiv'>
-            <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
-            updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
+      <Header />  
+        <div class="grid-container">     
+            <div className='entry-div'>
+              <Entry addEntryChange ={addEntryChange} />
+            </div>
+            <div className="entire-top-table-div">
+              {!entriesChange ? (
+                <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
+                //only one componant can be returned in a ternery operator hence <>, allows both to render 
+                <>
+                  <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
+                  <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} 
+                  updateSoldFlag={updateSoldFlag} setupdateSoldFlag={setupdateSoldFlag} updatedSoldIndex={updatedSoldIndex}
+                  changedDetail={changedDetail} />
+                </>)}
+            </div>
+            
+              <div className='net-balance-div'>
+                <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
+                updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
+              </div>
+              <div className='update-div'>
+                {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
+                setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} 
+                setChangedDetail={setChangedDetail} changedDetail={changedDetail} 
+                entryUpdated={entryUpdated} />):(null)}  
           </div>
-          <div className='updateDiv'>
-            {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
-            setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} setChangedDetail={setChangedDetail} changedDetail={changedDetail} 
-            entryUpdated={entryUpdated} />):(null)}  
-          </div>
-      </div>
-    </div>
-       
-          
-           
-      
+        </div> 
+
+    {/*MainDiv end */}
+    </div>  
   );
 }
 

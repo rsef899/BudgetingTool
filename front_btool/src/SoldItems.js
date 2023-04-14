@@ -70,7 +70,7 @@ function SoldItems(props){
     }
 
     return(
-        <div>
+        <>
             {props.entriesChange ? (
                 <table className="soldItemsTable">
                 <thead>
@@ -98,7 +98,7 @@ function SoldItems(props){
                 </tbody>
             </table>
             ): null}
-        </div>
+        </>
     );
 }
 export default SoldItems;

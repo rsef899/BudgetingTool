@@ -119,7 +119,7 @@ function UpdateInfo(props){
         {/*select item to edit drop down*/}
         <label htmlFor="nameDropdown">Item Name:</label>
         <select className="nameDropdown" onChange={handleNameChange} value={isOptionDisabled ? selectedName : defaultOption}>
-            <option disabled={isOptionDisabled} selected value="">Select an Option</option>
+            <option disabled={isOptionDisabled} value="">Select an Option</option>
             {nameOptions.map(option => (
             <option key={option}>{option}</option>
             ))}
@@ -129,7 +129,7 @@ function UpdateInfo(props){
             <>
             <label htmlFor="detailsDropdown">Detail:</label>
             <select className="detailsDropdown" onChange={handleDetailChange} value={isOptionDisabled2 ? selectedDetails : defaultOption}>
-                <option disabled={isOptionDisabled2} selected value="">Select an Option</option>
+                <option disabled={isOptionDisabled2} value="">Select an Option</option>
                 {detailsOptions.map(option => (
                 <option key={option}>{option}</option>
                 ))}
