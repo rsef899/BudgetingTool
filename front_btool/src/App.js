@@ -63,13 +63,16 @@ function App() {
                     <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
                     updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
                   </div>
-                  <div className='update-div'>
-                    {entriesChange ? (<UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
-                    setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} 
-                    setChangedDetail={setChangedDetail} changedDetail={changedDetail} 
-                    entryUpdated={entryUpdated} />):(null)}  
-              </div>
-            </div> 
+                  
+                    {entriesChange ? (
+                      <div className='update-div'>
+                        <UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
+                        setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} 
+                        setChangedDetail={setChangedDetail} changedDetail={changedDetail} 
+                        entryUpdated={entryUpdated} />
+                        </div> ):(null)}  
+                </div>
+            
           </div>
           <div className="entire-top-table-div">
                 {!entriesChange ? (
