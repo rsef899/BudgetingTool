@@ -10,12 +10,17 @@ function UpdateInfo(props){
     //details selection
     const [selectedDetails, setSelectedDetails] = useState('');
 
+    //these control whether we force the Select and option value on the dropwdowns
     const [isOptionDisabled, setIsOptionDisabled] = useState(true);
+    const [isOptionDisabled2, setIsOptionDisabled2] = useState(true);
 
+    //Alloqing/stopping the default value to be selected
     const [allowDefault, setallowDefault] = useState(0);
     const [defaultOption, setDefaultOption] = useState('');
 
-    console.log("the current item selected is " + selectedName)
+    //console log teh selected values
+    console.log("the current item selected in name DD is " + selectedName)
+    console.log("the current detail selected in details DD is " + selectedDetails)
     
     useEffect(() => {
         fetch("http://localhost:5000/api/get_itemNames")
@@ -24,11 +29,11 @@ function UpdateInfo(props){
         .catch(error => console.error(error));
     }, [props.entriesChange, props.pressedEnter, props.entryUpdated]);
 
-    console.log("is the blocker allowed? " + allowDefault)
     //bring down default option
     useEffect(() => {
-        if (allowDefault == 1){
+        if (allowDefault === 1){
             setIsOptionDisabled(false)
+            setIsOptionDisabled2(false)
             setDefaultOption('defaultOptionValue');
         }
     }, [allowDefault]);
@@ -56,20 +61,23 @@ function UpdateInfo(props){
         .catch(error => console.error(error));
     }, [selectedName, props.pressedEnter]);
 
+    //name drop down, Onchange
     const handleNameChange = (event) => {
-        setDefaultOption(selectedName)
+        setIsOptionDisabled(true)
         setSelectedName(event.target.value)
         setallowDefault(0)
     }
 
+    //details dropdown on change
     const handleDetailChange = (event) => {
-        setDefaultOption(selectedName)
+    
+        setIsOptionDisabled2(true)
         setSelectedDetails(event.target.value)
     }
 
     //get the entry from the user #onchange
     const handleUpdateGet = (event) => {
-     props.setChangedDetail(event.target.value)  
+        props.setChangedDetail(event.target.value)  
     }
     //send the entry
     const sendUpdateData = {
@@ -92,7 +100,7 @@ function UpdateInfo(props){
         }).then(response => response.json())
         .then(data => {
             //only do this if we are udating the sold item entry
-            if (data['UpdateIndex'] != undefined){
+            if (data['UpdateIndex'] !== undefined){
                 //set the flag to change the label
                 props.setupdateSoldFlag(1)
                 console.log("this shouldnt coem up")
@@ -104,13 +112,12 @@ function UpdateInfo(props){
         .catch(error => console.error(error));
         props.updateEntryLog();
     }
-    console.log("selected deatils is: " + selectedDetails)
 
     return (
         <div>
         {/*select item to edit drop down*/}
         <label htmlFor="nameDropdown">Item Name:</label>
-        <select className="nameDropdown" onChange={handleNameChange} value={isOptionDisabled ? defaultOption : selectedName}>
+        <select className="nameDropdown" onChange={handleNameChange} value={isOptionDisabled ? selectedName : defaultOption}>
             <option disabled={isOptionDisabled} selected value="">Select an Option</option>
             {nameOptions.map(option => (
             <option key={option}>{option}</option>
@@ -120,8 +127,8 @@ function UpdateInfo(props){
         {detailsOptions != '' ? (
             <>
             <label htmlFor="detailsDropdown">Detail:</label>
-            <select className="detailsDropdown" onChange={handleDetailChange} value={isOptionDisabled ? defaultOption : selectedName}>
-                <option disabled={isOptionDisabled} selected value="">Select an Option</option>
+            <select className="detailsDropdown" onChange={handleDetailChange} value={isOptionDisabled2 ? selectedDetails : defaultOption}>
+                <option disabled={isOptionDisabled2} selected value="">Select an Option</option>
                 {detailsOptions.map(option => (
                 <option key={option}>{option}</option>
                 ))}
