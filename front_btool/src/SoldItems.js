@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 function SoldItems(props){
 
     const [rows, setRows] = useState([]);
+    //sold items entry warning
+    const [showWarning, setShowWarning] = useState(false);
 
     function addRow(newRows){
         setRows([...rows, newRows]);
@@ -30,26 +32,16 @@ function SoldItems(props){
         }
     }, [props.updateSoldFlag])
 
-    //here we are declaring that we are wanting to get the dom of the sold input
-    const soldInputRef = useRef(null);
+    const inputRef = useRef(null);
 
     // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
         if (event.keyCode === 13) {
 
-            //use HTML5 custom warning Label, to show our warning
-            if (!soldInputRef.current.checkValidity()) {
-                //deisplay the warning label
-                soldInputRef.current.reportValidity();
+            if (inputRef.current && !inputRef.current.checkValidity()) {
+                inputRef.current.reportValidity();
                 return;
-            }
-            if (event.target.value = ""){
-                soldInputRef.current.setCustomValidity("Can't be left blank")
-                return;
-            }
-            else {
-                soldInputRef.current.setCustomValidity("")
-            }
+              }              
             props.prop2();
             //create a copy of the current rows to use
             const updatedRows = [...rows];
@@ -106,15 +98,16 @@ function SoldItems(props){
                             //if the item hasnt been entered it should still be an entry field
                             <td>
                                 <input 
-                                required="required"
                                 type="number" 
                                 min= "0" 
                                 max = "10000"
                                 step="1"
                                 value={row.column1}
-                                //we are creating a reference to the sold inputs dom element
-                                ref={soldInputRef}
+                                //we are creating a reference to the inputs dom element
+                                ref={inputRef}
                                 onKeyDown={(event) => {
+                                    
+                                    setShowWarning(false);
                                     handleKeyPress(event, index)}}
                             />
                             </td>

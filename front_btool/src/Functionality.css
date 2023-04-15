@@ -220,6 +220,11 @@
   .soldItemsTable td input{
     padding-top: 12.8px;
     padding-bottom: 12.8px;
+    width: 97px;
+  }
+
+  .soldItemsTable th {
+    width: 70px;
   }
 
   

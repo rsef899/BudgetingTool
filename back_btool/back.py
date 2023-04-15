@@ -107,10 +107,14 @@ def get_netBalance():
 
     #go through all the sold items that need to be evaluated
     for soldItems in tobeEvaled_SoldItemsDic:
-        #add the sold amount to the netBalance
-        netBalance += int(tobeEvaled_SoldItemsDic[soldItems])
-        #remove the evaluated item from the tobeevauated dictionary
-        del changedSoldlist[soldItems]
+        try:
+            #add the sold amount to the netBalance
+            netBalance += int(tobeEvaled_SoldItemsDic[soldItems])
+            #remove the evaluated item from the tobeevauated dictionary
+            del changedSoldlist[soldItems]
+        except TypeError:
+            print("Sold Item not inputed correcty")
+
     #set the tobeEvaluated official dictionary to the mutable dictionary, should = {}
     tobeEvaled_SoldItemsDic = changedSoldlist
     return {'netBalance': netBalance}
