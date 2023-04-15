@@ -7,6 +7,7 @@ import SoldItems from './SoldItems';
 import NetBalance from './NetBalance';
 import UpdateInfo from './UpdateInfo';
 import ResetBack from './ResetBack';
+import LoadingScreen from './LoadingScreen';
 
 
 function App() {
@@ -42,7 +43,8 @@ function App() {
 
   return (
     <div>
-      <ResetBack addhasReset={addhasReset}/>
+      <LoadingScreen/>
+      {/* <ResetBack addhasReset={addhasReset}/>
       <Header />  
       <div class="main-grid-container">   
           <div className='grid-container-mover'>
@@ -77,7 +79,7 @@ function App() {
                     changedDetail={changedDetail} />
                   </>)}
               </div>
-      </div>
+      </div> */}
     {/*MainDiv end */}
     </div>  
   );
