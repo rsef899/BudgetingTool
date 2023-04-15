@@ -13,10 +13,15 @@ html = ""
 
 current_updating_item = ''
 
+#CONNECTION TESTER: of the items
+@app.route('/api/get_test', methods=['GET'])
+def get_test():
+    return("Hello")
+
+
 def create_table():
     global html
     global entriesList
-    print(str(entriesList))
     html = "<table><thead><tr><th>Name</th><th>Date</th><th>Price</th></tr></thead><tbody>"
     for entry in entriesList:
         html += f"<tr><td>{entry['name']}</td><td>{entry['dateBought']}</td><td>{entry['price']}</td></tr>"

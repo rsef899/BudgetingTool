@@ -50,7 +50,7 @@ function EntryForm(props) {
             <label>
                 Price:
                 {/*e.taget.value leads to the name variable*/}
-                <input type="text" value={price} onChange = {(e) => setPrice(e.target.value)} />
+                <input required="required" type="number" min="0" step="1" max = "10000" value={price} onChange = {(e) => setPrice(e.target.value)} />
             </label>
             <br />
             <button type = "submit">Add Expense</button>

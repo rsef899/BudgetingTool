@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function SoldItems(props){
 
     const [rows, setRows] = useState([]);
+    //sold items entry warning
+    const [showWarning, setShowWarning] = useState(false);
 
     function addRow(newRows){
         setRows([...rows, newRows]);
@@ -30,9 +32,18 @@ function SoldItems(props){
         }
     }, [props.updateSoldFlag])
 
+    const inputRef = useRef(null);
+
     // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
         if (event.keyCode === 13) {
+
+            //use HTML5 custom warning Label, to show our warning
+            if (!inputRef.current.checkValidity()) {
+                //deisplay the warning label
+                inputRef.current.reportValidity();
+                return;
+            }
             props.prop2();
             //create a copy of the current rows to use
             const updatedRows = [...rows];
@@ -65,7 +76,7 @@ function SoldItems(props){
                 updatedRows[index].column1 = enteredValue;
                 setRows(updatedRows); 
             })
-            .catch(error => console.error(error));
+            .catch(error => {console.error(error)});
         }
     }
 
@@ -87,11 +98,22 @@ function SoldItems(props){
                                 <td><label>{row.column1}</label></td>
                             ) : (
                             //if the item hasnt been entered it should still be an entry field
-                            <td><input 
-                                type="text" 
+                            <td>
+                                <input 
+                                required="required"
+                                type="number" 
+                                min= "0" 
+                                max = "10000"
+                                step="1"
                                 value={row.column1}
-                                onKeyDown={(event) => handleKeyPress(event, index)}
-                            /></td>
+                                //we are creating a reference to the inputs dom element
+                                ref={inputRef}
+                                onKeyDown={(event) => {
+                                    
+                                    setShowWarning(false);
+                                    handleKeyPress(event, index)}}
+                            />
+                            </td>
                         )}
                         </tr>
                     ))}
