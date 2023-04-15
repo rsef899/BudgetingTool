@@ -117,7 +117,7 @@ function UpdateInfo(props){
     return (
         <div>
         {/*select item to edit drop down*/}
-        <label htmlFor="nameDropdown">Item Name:</label>
+        <label className="updateNameLabel" htmlFor="nameDropdown">Item Name:&nbsp;&zwnj;</label>
         <select className="nameDropdown" onChange={handleNameChange} value={isOptionDisabled ? selectedName : defaultOption}>
             <option disabled={isOptionDisabled} value="">Select an Option</option>
             {nameOptions.map(option => (
@@ -127,7 +127,7 @@ function UpdateInfo(props){
         {/*select field to edit drop down if item to edit has been chosen*/}
         {detailsOptions != '' ? (
             <>
-            <label htmlFor="detailsDropdown">Detail:</label>
+            <label className="updateDetailLabel" htmlFor="detailsDropdown">Detail:&nbsp;&zwnj;</label>
             <select className="detailsDropdown" onChange={handleDetailChange} value={isOptionDisabled2 ? selectedDetails : defaultOption}>
                 <option disabled={isOptionDisabled2} value="">Select an Option</option>
                 {detailsOptions.map(option => (

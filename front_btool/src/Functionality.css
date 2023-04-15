@@ -101,6 +101,34 @@
     font-family: 'Rubik', sans-serif;
   }
 
+  .update-div button {
+    margin-top: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .update-div label {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-size: 20px;
+  }
+
+  .updateNameLabel {
+    width: fit-content;
+    padding-left: 15px;
+  }
+
+  .updateDetailLabel{
+    width: fit-content;
+    padding-left: 25px;
+  }
+  .nameDropdown{
+    padding: 6px;
+  }
+
+  .detailsDropdown{
+    padding: 6px;
+  }
+
 /*column 2*/  
 /****************** Table div, with entries and sold price*/
   .entire-top-table-div {

@@ -72,7 +72,7 @@ function EntryForm(props) {
         <form onSubmit={handleSubmit} className="mainEntry">
             <label>
                 Item Name:
-                <input type="text" value={name} ref={nameInputRef} onChange={(e) => {
+                <input required="required" type="text" value={name} ref={nameInputRef} onChange={(e) => {
                     setName(e.target.value);
                     setHasDupes(false);
                 }} />
@@ -81,7 +81,7 @@ function EntryForm(props) {
 
             <label>
                 Date Purchased:
-                <input type="text" value={dateBought} onChange={(e) => setDate(e.target.value)} />
+                <input required="required" type="text" value={dateBought} onChange={(e) => setDate(e.target.value)} />
             </label>
             <br />
 
