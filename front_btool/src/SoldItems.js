@@ -43,6 +43,13 @@ function SoldItems(props){
                 soldInputRef.current.reportValidity();
                 return;
             }
+            if (event.target.value = ""){
+                soldInputRef.current.setCustomValidity("Can't be left blank")
+                return;
+            }
+            else {
+                soldInputRef.current.setCustomValidity("")
+            }
             props.prop2();
             //create a copy of the current rows to use
             const updatedRows = [...rows];

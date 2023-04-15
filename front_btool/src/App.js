@@ -6,6 +6,7 @@ import Table from './Table';
 import SoldItems from './SoldItems';
 import NetBalance from './NetBalance';
 import UpdateInfo from './UpdateInfo';
+import ResetBack from './ResetBack';
 
 
 function App() {
@@ -39,18 +40,9 @@ function App() {
   //changed detail
   const [changedDetail, setChangedDetail] = useState('');
 
-  //table will reset when page is refreshed
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      fetch("http://localhost:5000/api/reset_table", {
-        method: "POST"
-      });
-      addhasReset();
-    }
-  }, []);
-
   return (
     <div>
+      <ResetBack addhasReset={addhasReset}/>
       <Header />  
       <div class="main-grid-container">   
           <div className='grid-container-mover'>
