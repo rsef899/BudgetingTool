@@ -19,6 +19,21 @@ def get_test():
     return("Hello")
 
 
+#check if the entry we want to add is duplicate
+@app.route('/api/check_name_dupes', methods=['POST'])
+def check_name_dupes():
+    global entriesList
+
+    data = request.json
+    testingName = str(data['name'])
+    for entry in entriesList:
+        if entry['name'] == testingName:
+            return {'Outcome': True}
+
+    #if name not found return false
+    return {'Outcome': False}
+
+#Creates the entries table html string
 def create_table():
     global html
     global entriesList
@@ -41,7 +56,6 @@ def add_entry():
     boughtPriceDictionary[str(len(entriesList)-1)] = price
     global netBalance 
     netBalance -= int(price)
-
 
     if (len(entriesList) != 0):
         create_table()

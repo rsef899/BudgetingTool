@@ -3,8 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 function SoldItems(props){
 
     const [rows, setRows] = useState([]);
-    //sold items entry warning
-    const [showWarning, setShowWarning] = useState(false);
 
     function addRow(newRows){
         setRows([...rows, newRows]);
@@ -32,16 +30,17 @@ function SoldItems(props){
         }
     }, [props.updateSoldFlag])
 
-    const inputRef = useRef(null);
+    //here we are declaring that we are wanting to get the dom of the sold input
+    const soldInputRef = useRef(null);
 
     // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
         if (event.keyCode === 13) {
 
             //use HTML5 custom warning Label, to show our warning
-            if (!inputRef.current.checkValidity()) {
+            if (!soldInputRef.current.checkValidity()) {
                 //deisplay the warning label
-                inputRef.current.reportValidity();
+                soldInputRef.current.reportValidity();
                 return;
             }
             props.prop2();
@@ -106,11 +105,9 @@ function SoldItems(props){
                                 max = "10000"
                                 step="1"
                                 value={row.column1}
-                                //we are creating a reference to the inputs dom element
-                                ref={inputRef}
+                                //we are creating a reference to the sold inputs dom element
+                                ref={soldInputRef}
                                 onKeyDown={(event) => {
-                                    
-                                    setShowWarning(false);
                                     handleKeyPress(event, index)}}
                             />
                             </td>

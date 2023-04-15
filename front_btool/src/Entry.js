@@ -1,14 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 function EntryForm(props) {
-    //[1,2], 1 is name of the state, 2 is the chnaging function of the state
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [dateBought, setDate] = useState("");
+    const [hasDupes, setHasDupes] = useState(false);
+
+    //refernce to names entry dom
+    const nameInputRef = useRef(null);
+    
+    //Seperate function ofr checking for dupes, as it should be an asynchronus operation
+    const checkForDupes = () => {
+        //set the name we are checking for dupes
+        const dupesData = {
+            name: name
+        } 
+        fetch('http://localhost:5000/api/check_name_dupes',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dupesData)
+        })
+        .then(response => response.json())
+        .then((data) => {
+            //The entry is a suplicaet:
+            if (data['Outcome'] === true) {
+                setHasDupes(true);
+            } else {
+                setHasDupes(false);
+            }
+        })
+        .catch(error => console.error(error));
+    }
+
+    //evaluate the dupe checker, as soon as it changes
+    useEffect(() => {
+        if (hasDupes === true) {
+            nameInputRef.current.setCustomValidity("No duplicated item names"); 
+        } else {
+            nameInputRef.current.setCustomValidity("");
+        }
+    }, [hasDupes]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        //run the asynchronus operation for checking for the dupes
+        checkForDupes();
         const formData = {
             name: name,
             price: price,
@@ -16,7 +55,6 @@ function EntryForm(props) {
         };
 
         fetch('http://localhost:5000/api/add_entry',{
-            // post method is used to send data to the server
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,7 +63,6 @@ function EntryForm(props) {
         })
         .then(response => response.json())
         .then((data) => {
-            //update the entries counter
             props.addEntryChange();
         })
         .catch(error => console.error(error));
@@ -35,25 +72,25 @@ function EntryForm(props) {
         <form onSubmit={handleSubmit} className="mainEntry">
             <label>
                 Item Name:
-                {/*e.taget.value leads to the name variable*/}
-                <input type="text" value={name} onChange = {(e) => setName(e.target.value)} />
+                <input type="text" value={name} ref={nameInputRef} onChange={(e) => {
+                    setName(e.target.value);
+                    setHasDupes(false);
+                }} />
             </label>
             <br />
 
             <label>
                 Date Purchased:
-                {/*e.taget.value leads to the name variable*/}
-                <input type="text" value={dateBought} onChange = {(e) => setDate(e.target.value)} />
+                <input type="text" value={dateBought} onChange={(e) => setDate(e.target.value)} />
             </label>
             <br />
 
             <label>
                 Price:
-                {/*e.taget.value leads to the name variable*/}
-                <input required="required" type="number" min="0" step="1" max = "10000" value={price} onChange = {(e) => setPrice(e.target.value)} />
+                <input required="required" type="number" min="0" step="1" max="10000" value={price} onChange={(e) => setPrice(e.target.value)} />
             </label>
             <br />
-            <button type = "submit">Add Expense</button>
+            <button type="submit">Add Expense</button>
         </form>
         
     );
