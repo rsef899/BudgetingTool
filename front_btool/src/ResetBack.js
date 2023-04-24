@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 function ResetBack(props){
     useEffect(() => {
         console.log("page has been reset")
-        fetch("http://localhost:5000/api/reset_table", {
+        fetch("http://139.144.99.223:5000/api/reset_table", {
             method: "POST"
           });
           props.addhasReset();

@@ -5,7 +5,7 @@ function NetBalance(props){
 
 //***Update net balance when enter is hit 
     useEffect(() => {
-        fetch("http://localhost:5000/api/get_netBalance")
+        fetch("http://139.144.99.223:5000/api/get_netBalance")
         .then(response => response.json())
         .then(data => setNetBalanceHeader(data.netBalance))
         .catch(error => console.error(error));

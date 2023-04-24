@@ -59,7 +59,7 @@ function SoldItems(props){
                 enteredValue: enteredValue
             };
         
-            fetch('http://localhost:5000/api/recieve_sale_item', {
+            fetch('http://139.144.99.223:5000/api/recieve_sale_item', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'

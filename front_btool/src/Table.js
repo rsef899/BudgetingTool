@@ -5,7 +5,7 @@ function Table(props){
     const [tableHtml, setTableHtml] = useState("");
     
     useEffect(() => {
-        fetch("http://localhost:5000/api/get_table")
+        fetch("http://139.144.99.223:5000/api/get_table")
           .then(response => response.json())
           .then(data => setTableHtml(data.table_html))
           .catch(error => console.error(error));

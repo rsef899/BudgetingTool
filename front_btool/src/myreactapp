@@ -1,0 +1,7 @@
+server {
+ server_name 139.144.99.223;
+ root /var/www/myreactapp/build
+ index index.html
+ location / {
+ try_files $uri /index.html =404}
+}

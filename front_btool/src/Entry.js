@@ -8,6 +8,8 @@ function EntryForm(props) {
 
     //refernce to names entry dom
     const nameInputRef = useRef(null);
+    const priceInputRef = useRef(null);
+    const dateInputRef = useRef(null);
     
     //Seperate function ofr checking for dupes, as it should be an asynchronus operation
     const checkForDupes = () => {
@@ -15,7 +17,7 @@ function EntryForm(props) {
         const dupesData = {
             name: name
         } 
-        fetch('http://localhost:5000/api/check_name_dupes',{
+        fetch('http://139.144.99.223:5000/api/check_name_dupes',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,7 +56,7 @@ function EntryForm(props) {
             dateBought: dateBought
         };
 
-        fetch('http://localhost:5000/api/add_entry',{
+        fetch('http://139.144.99.223:5000/api/add_entry',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -66,6 +68,10 @@ function EntryForm(props) {
             props.addEntryChange();
         })
         .catch(error => console.error(error));
+
+        setName("");
+        setDate("");
+        setPrice("");
     };
 
     return (
@@ -81,13 +87,13 @@ function EntryForm(props) {
 
             <label>
                 Date Purchased:
-                <input required="required" type="text" value={dateBought} onChange={(e) => setDate(e.target.value)} />
+                <input required="required" type="text" value={dateBought} ref={dateInputRef} onChange={(e) => setDate(e.target.value)} />
             </label>
             <br />
 
             <label>
                 Price:
-                <input required="required" type="number" min="0" step="1" max="10000" value={price} onChange={(e) => setPrice(e.target.value)} />
+                <input required="required" type="number" min="0" step="1" max="10000" value={price} ref={priceInputRef} onChange={(e) => setPrice(e.target.value)} />
             </label>
             <br />
             <button type="submit">Add Expense</button>
