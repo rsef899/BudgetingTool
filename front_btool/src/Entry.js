@@ -47,13 +47,15 @@ function EntryForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        const [year, month, day] = dateBought.split('-');
+        //formting date using a template literal
+        const dateBoughtFormatted = `${day}/${month}/${year.slice(-2)}`;
         //run the asynchronus operation for checking for the dupes
         checkForDupes();
         const formData = {
             name: name,
             price: price,
-            dateBought: dateBought
+            dateBought: dateBoughtFormatted
         };
 
         fetch('http://139.144.99.223:5000/api/add_entry',{
@@ -87,7 +89,7 @@ function EntryForm(props) {
 
             <label>
                 Date Purchased:
-                <input required="required" type="text" value={dateBought} ref={dateInputRef} onChange={(e) => setDate(e.target.value)} />
+                <input required="required" type="date" value={dateBought} ref={dateInputRef} onChange={(e) => setDate(e.target.value)} />
             </label>
             <br />
 
