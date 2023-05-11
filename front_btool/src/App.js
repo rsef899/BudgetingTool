@@ -28,7 +28,7 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
 /*******Reset detection */
   const [hasReset, sethasReset] = useState(0);
   //function to detect enter pressed
-  const addhasReset = (entry) => {
+  const addhasReset = () => {
     sethasReset((prevState) => prevState + 1);
   };
   /*******Submited Update tableUpdate */
@@ -47,8 +47,8 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
     <div>
       {onHomeScreen ? (
         <>
-         <LoadingScreen setOnHomeScreen={setOnHomeScreen}/>
-         <ResetBack addhasReset={addhasReset}/>
+         <LoadingScreen setOnHomeScreen={setOnHomeScreen} addhasReset={addhasReset} hasReset={hasReset}/>
+         <ResetBack hasReset={hasReset}/>
         </>
         ):(
           <>

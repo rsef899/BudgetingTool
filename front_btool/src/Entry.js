@@ -17,7 +17,7 @@ function EntryForm(props) {
         const dupesData = {
             name: name
         } 
-        fetch('http://139.144.99.223:5000/api/check_name_dupes',{
+        fetch('http://localhost:5000/api/check_name_dupes',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -58,7 +58,7 @@ function EntryForm(props) {
             dateBought: dateBoughtFormatted
         };
 
-        fetch('http://139.144.99.223:5000/api/add_entry',{
+        fetch('http://localhost:5000/api/add_entry',{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ function EntryForm(props) {
 
             <label>
                 Price:
-                <input required="required" type="number" min="0" step="1" max="10000" value={price} ref={priceInputRef} onChange={(e) => setPrice(e.target.value)} />
+                <input required="required" type="number" min="0" step="0.01" max="10000" value={price} ref={priceInputRef} onChange={(e) => setPrice(e.target.value)} />
             </label>
             <br />
             <button type="submit">Add Expense</button>

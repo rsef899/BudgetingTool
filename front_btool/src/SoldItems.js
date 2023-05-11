@@ -59,7 +59,7 @@ function SoldItems(props){
                 enteredValue: enteredValue
             };
         
-            fetch('http://139.144.99.223:5000/api/recieve_sale_item', {
+            fetch('http://localhost:5000/api/recieve_sale_item', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ function SoldItems(props){
                                 type="number" 
                                 min= "0" 
                                 max = "10000"
-                                step="1"
+                                step="0.01"
                                 value={row.column1}
                                 //we are creating a reference to the inputs dom element
                                 ref={inputRef}

@@ -20,7 +20,7 @@ function UpdateInfo(props){
 
 
     useEffect(() => {
-        fetch("http://139.144.99.223:5000/api/get_itemNames")
+        fetch("http://localhost:5000/api/get_itemNames")
         .then(response => response.json())
         .then(data => setNameOptions(data.names))
         .catch(error => console.error(error));
@@ -40,7 +40,7 @@ function UpdateInfo(props){
         Item: selectedName
     }
     useEffect(() => {
-        fetch('http://139.144.99.223:5000/api/get_itemDetails_Reciever',{
+        fetch('http://localhost:5000/api/get_itemDetails_Reciever',{
             // post method is used to send data to the server
             method: 'POST',
             headers: {
@@ -51,7 +51,7 @@ function UpdateInfo(props){
         //cannot chain a fetch inside an arrow function
         .then(response => {
             ("Post selected name was succesfull, now getting details list");
-            return fetch('http://139.144.99.223:5000/api/get_itemDetails_Sender');
+            return fetch('http://localhost:5000/api/get_itemDetails_Sender');
         })
         .then(response => response.json())
         .then(data => setDetailsOptions(data.details))
@@ -89,7 +89,7 @@ function UpdateInfo(props){
     //last step: send
     const handleUpdateSend = (event) => {
         event.preventDefault();
-        fetch('http://139.144.99.223:5000/api/update_detail',{
+        fetch('http://localhost:5000/api/update_detail',{
             // post method is used to send data to the server
             method: 'POST',
             headers: {

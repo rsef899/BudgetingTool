@@ -55,7 +55,7 @@ def add_entry():
     global boughtPriceDictionary
     boughtPriceDictionary[str(len(entriesList)-1)] = price
     global netBalance 
-    netBalance -= int(price)
+    netBalance -= float(price)
 
     if (len(entriesList) != 0):
         create_table()
@@ -109,7 +109,7 @@ def get_netBalance():
     for soldItems in tobeEvaled_SoldItemsDic:
         try:
             #add the sold amount to the netBalance
-            netBalance += int(tobeEvaled_SoldItemsDic[soldItems])
+            netBalance += float(tobeEvaled_SoldItemsDic[soldItems])
             #remove the evaluated item from the tobeevauated dictionary
             del changedSoldlist[soldItems]
         except TypeError:
@@ -117,7 +117,7 @@ def get_netBalance():
 
     #set the tobeEvaluated official dictionary to the mutable dictionary, should = {}
     tobeEvaled_SoldItemsDic = changedSoldlist
-    return {'netBalance': netBalance}
+    return {'netBalance': "{:.2f}".format(netBalance)}
 
 @app.route('/api/get_itemNames', methods=['GET'])
 def get_itemNames():
@@ -171,7 +171,7 @@ def update_detail():
                 try:
                     if str(index) in saleItemsDictionary:
                         #we must undo teh previous sale cost
-                        netBalance -= int(saleItemsDictionary[str(index)])
+                        netBalance -= float(saleItemsDictionary[str(index)])
                         saleItemsDictionary[str(index)] = data['entry']
                         tobeEvaled_SoldItemsDic[str(index)] = data['entry']
                         return {"UpdateIndex" : index}
@@ -182,8 +182,8 @@ def update_detail():
         for index2, entry in enumerate(entriesList):
             if entry['name'] == data['name']:
                 if (data['detail'] == 'price'):
-                    netBalance += int(entriesList[index2]['price'])
-                    netBalance -= int(data['entry'])
+                    netBalance += float(entriesList[index2]['price'])
+                    netBalance -= float(data['entry'])
 
                 entriesList[index2][data['detail']] = data['entry']
                 print(str(entriesList))

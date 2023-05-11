@@ -6,7 +6,15 @@ function LoadingScreen(props){
 
     const handleLoginButton = (event) => {
         props.setOnHomeScreen(false);
+        props.addhasReset();
+        console.log(props.hasReset);
+        console.log("page has been reset")
+        fetch("http://localhost:5000/api/reset_table", {
+            method: "POST"
+          });
     }
+
+    
 
     return(
          <div className='loading-Screen-Container'>
