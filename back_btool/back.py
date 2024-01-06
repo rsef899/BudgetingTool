@@ -1,8 +1,22 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS, cross_origin
+from flask_session import Session
+from dbSet import connect_to_db
 
 app = Flask(__name__)
 CORS(app)
+
+# Sessioning
+SESSION_TYPE = "filesystem"
+app.config.from_object(__name__)
+Session(app)
+
+@app.route("/api/set_session/<user>, methods=['POST']")
+def set_session(user):
+        session["user"] = user
+connection = connect_to_db()
+cursor = connection.cursor()
+
 
 entriesList = []
 saleItemsDictionary = {}
@@ -47,6 +61,22 @@ def create_table():
 @app.route('/api/add_entry', methods=['POST'])
 def add_entry():
     data = request.json
+
+    query = """CREATE TABLE items (
+        id integer PRIMARY KEY,
+        name text NOT NULL,
+        date text NOT NULL,
+        price double NOT NULL,
+        sold_price double
+    )"""
+
+
+    query = """INSERT into items (name,date,price)
+            Values(?, ?, ?)"""
+    cursor.execute(query, (data['name'], data['dateBought'], data['price']))
+    connection.commit()
+
+    # old implementation
     entriesList.append(data)
     name = data['name']
     date = data['dateBought']
