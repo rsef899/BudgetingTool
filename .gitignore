@@ -1,7 +1,6 @@
 **/UB_venv/
 **/flask_session/
 .env
-dbSet
-dbSet.py
+model.py
 budgeter_db.sqlite
 

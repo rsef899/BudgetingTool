@@ -15,9 +15,6 @@ import store from './store/store';
 
 
 function App() {
-  const user = useSelector(state => state.user)
-  console.log(user);
-
 /*******After Main Loading Screen */
 const[onHomeScreen, setOnHomeScreen] = useState(true)
 /*******entry Change detection */

@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, Response
 from flask_cors import CORS, cross_origin
 from flask_session import Session
-from dbSet import connect_to_db
+import model
 
 app = Flask(__name__)
 CORS(app)
@@ -14,7 +14,8 @@ Session(app)
 @app.route("/api/set_session/<user>, methods=['POST']")
 def set_session(user):
         session["user"] = user
-connection = connect_to_db()
+
+connection = model.connect_to_db()
 cursor = connection.cursor()
 
 
@@ -90,6 +91,12 @@ def add_entry():
     if (len(entriesList) != 0):
         create_table()
     return {'message': 'Data recieved succesfully'}
+
+@app.route('/api/fetch_items', methods=['GET'])
+def fetch_items():
+    return jsonify(model.get_items(cursor))
+    #return Response(jsonify(model.get_items(cursor)), mimetype="application/json")
+
 
 @app.route('/api/get_table', methods=['GET'])
 def get_table():
