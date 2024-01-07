@@ -124,14 +124,13 @@ def reset_table():
     return jsonify(success=True)
 
 #getting the sale value
-@app.route('/api/recieve_sale_item', methods=['POST'])
-def recieve_sale_item():
-    data = request.json
-    global saleItemsDictionary
-    saleItemsDictionary[str(data['itemNumber'])] = data['enteredValue']
-    tobeEvaled_SoldItemsDic[str(data['itemNumber'])] = data['enteredValue']
-    return {'message': 'Data recieved succesfully'}
+@app.route('/api/recieve_sale_item/<item_id>', methods=['PATCH'])
+def recieve_sale_item(item_id):
 
+    data = request.json
+    model.patch_sold_item(cursor, data, item_id)
+    connection.commit()
+    return {'message': 'Item updated succesfully'}
 
 #get the net balance of the items
 @app.route('/api/get_netBalance', methods=['GET'])

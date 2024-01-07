@@ -10,7 +10,7 @@ import ResetBack from './ResetBack';
 import LoadingScreen from './LoadingScreen';
 
 //REdux
-import {connect,useSelector } from 'react-redux';
+import {connect} from 'react-redux';
 import store from './store/store';
 
 

@@ -23,6 +23,7 @@ const itemsSlice = createSlice({
             state.items = action.payload;
         },
     },
+    //Used to handle the table async thunk
     extraReducers: (builder) => {
         builder.addCase(fetchItems.fulfilled, (state, action) => {
             // handle the fulfilled state

@@ -8,11 +8,11 @@ function Table(props){
 
     const dispatch = useDispatch();
     let items = useSelector(state => state.items.items)
-    console.log(items)
-  
+
     useEffect(() => {
       dispatch(fetchItems());
-
+      console.log("Table")
+      console.log(items)
       fetch("http://localhost:5000/api/get_table")
           .then(response => response.json())
           .then(data => setTableHtml(data.table_html))

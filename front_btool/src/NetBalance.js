@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {useSelector, useDispatch} from 'react-redux';
-
-
 
 function NetBalance(props){
     const [netBalanceHeader, setNetBalanceHeader] = useState("");
 
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
-
-
 //***Update net balance when enter is hit 
     useEffect(() => {
-        dispatch({ type: "SET_USER", user: "Robert" });
 
         fetch("http://localhost:5000/api/get_netBalance")
         .then(response => response.json())
