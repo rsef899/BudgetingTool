@@ -3,4 +3,5 @@
 .env
 model.py
 budgeter_db.sqlite
+test_queries.py
 

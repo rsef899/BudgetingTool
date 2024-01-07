@@ -135,26 +135,8 @@ def recieve_sale_item(item_id):
 #get the net balance of the items
 @app.route('/api/get_netBalance', methods=['GET'])
 def get_netBalance():
-    global netBalance
-    global tobeEvaled_SoldItemsDic
-
-    #create a variable that will change, but initialises the same as tobe sold items
-    changedSoldlist = tobeEvaled_SoldItemsDic.copy()
-
-    #go through all the sold items that need to be evaluated
-    for soldItems in tobeEvaled_SoldItemsDic:
-        try:
-            #add the sold amount to the netBalance
-            netBalance += float(tobeEvaled_SoldItemsDic[soldItems])
-            #remove the evaluated item from the tobeevauated dictionary
-            del changedSoldlist[soldItems]
-        except TypeError:
-            print("Sold Item not inputed correcty")
-
-    #set the tobeEvaluated official dictionary to the mutable dictionary, should = {}
-    tobeEvaled_SoldItemsDic = changedSoldlist
-    return {'netBalance': "{:.2f}".format(netBalance)}
-
+    return {'netBalance': "{:.2f}".format(model.compute_net_balance(cursor))}
+    
 @app.route('/api/get_itemNames', methods=['GET'])
 def get_itemNames():
     names = []

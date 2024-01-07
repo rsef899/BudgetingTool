@@ -225,7 +225,7 @@
   }
 
   .soldItemsTable td input{
-
+    height: 20px;
     width: 50px;
     
   }
