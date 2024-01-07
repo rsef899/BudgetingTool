@@ -209,7 +209,7 @@
   }
   
   .soldItemsTable td {
-    height: 44  px;
+    height: 44px;
     width: 50px;
     padding: 0px;
   }
@@ -220,10 +220,12 @@
   }
   
   .soldItemsTable td form{
+
     display: table-row;
   }
 
   .soldItemsTable td input{
+
     width: 50px;
     
   }
