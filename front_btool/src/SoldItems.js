@@ -19,7 +19,8 @@ function SoldItems(props){
 
     // event listener function for the sold entry boxes
     function handleKeyPress(event, index) {
-        if (event.keyCode === 13) {
+        event.preventDefault();
+
             console.log("Enter pressed in input at index", index);
 
             fetch(`http://localhost:5000/api/recieve_sale_item/${index}`, {
@@ -27,7 +28,7 @@ function SoldItems(props){
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: JSON.stringify({sold_price : event.target.value})
+              body: JSON.stringify({sold_price : event.target.elements[0].value})
             })
             .then(response => response.json())
             .then(data => {
@@ -35,7 +36,7 @@ function SoldItems(props){
                 dispatch(fetchItems())
             })
             .catch(error => console.error(error))
-        }
+
     }
 
     return (
@@ -54,16 +55,16 @@ function SoldItems(props){
                                 <tr key={index}>
                                     <td>
                                         {item.sold_price
-                                            ? <label>{item.sold_price}</label> :
-                                            <input 
-                                            type="number" 
-                                            min= "0" 
-                                            max = "10000"
-                                            step="0.01"
-                                            onKeyDown={(event) => {
-                                                handleKeyPress(event, index)}}
-                                            />
-                                            }
+                                            ? (<label>{item.sold_price}</label>) : (
+                                            <form onSubmit={(event) => handleKeyPress(event, index)}>
+                                                <input 
+                                                type="number" 
+                                                min= "0" 
+                                                max = "10000"
+                                                step="0.01"
+                                                />
+                                            </form>
+                                        )}
                                     </td>
                                 </tr>
                             );

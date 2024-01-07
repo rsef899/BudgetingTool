@@ -136,7 +136,7 @@
     grid-column: 2 / 3;
     /*non grid styling*/
     background-color: rgb(231, 233, 236);
-    width: 470px;
+    width: 490px;
     min-height: 300px;
     height: auto;
     border-radius: 10px;
@@ -186,8 +186,8 @@
   }
   
   .itemsTable td {
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding: 12px;
+    height: 20px;
   }
   /*Table 1 column widths*/
   .itemsTable th:first-child,
@@ -209,18 +209,23 @@
   }
   
   .soldItemsTable td {
-    height: 35px;
+    height: 44  px;
+    width: 50px;
+    padding: 0px;
   }
   
   .soldItemsTable td label{
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding: 12px;
+    width: 50px;
   }
   
+  .soldItemsTable td form{
+    display: table-row;
+  }
+
   .soldItemsTable td input{
-    padding-top: 12.8px;
-    padding-bottom: 12.8px;
-    width: 97px;
+    width: 50px;
+    
   }
 
   .soldItemsTable th {
