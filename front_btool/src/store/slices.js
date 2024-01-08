@@ -10,28 +10,45 @@ export const fetchItems = createAsyncThunk(
     }
 );
 
+export const fetchNetBalance = createAsyncThunk(
+    'items/fetchNetBalance',
+    async () => {
+        const response = await fetch("http://localhost:5000/api/get_netBalance");
+        const data = await response.json();
+        return data;
+    }
+)
+
 // Define an initial state
 const initialState = {
   items: [],
+  netBalance: 0
 };
 
-const itemsSlice = createSlice({
+const slice = createSlice({
     name: 'mySlice',
     initialState: initialState,
     reducers: {
         set_items: (state, action) => {
             state.items = action.payload;
         },
+        set_net_balance: (state, action) =>{
+            state.netBalance = action.payload;
+        }
     },
     //Used to handle the table async thunk
     extraReducers: (builder) => {
-        builder.addCase(fetchItems.fulfilled, (state, action) => {
+        builder
+        .addCase(fetchItems.fulfilled, (state, action) => {
             // handle the fulfilled state
             state.items = action.payload;
-        });
-        // handle pending and rejected states if necessary
+        })
+        builder.addCase(fetchNetBalance.fulfilled, (state, action) => {
+            // handle the fulfilled state
+            state.netBalance = action.payload.netBalance;
+        })
     },
 });
 
-export const { sliceActions } = itemsSlice.actions; // Export the actions as named export
-export const itemsReducer = itemsSlice.reducer; // Export the reducer as named export
+export const { set_items, set_net_balance } = slice.actions
+export const mainReducer = slice.reducer; // Export the reducer as named export

@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {set_net_balance, fetchNetBalance} from "./store/slices"
+
 
 function NetBalance(props){
     const [netBalanceHeader, setNetBalanceHeader] = useState("");
 
+    let netBalance = useSelector(state => state.mySlice.netBalance)
+    const dispatch = useDispatch()
+
 //***Update net balance when enter is hit 
-    useEffect(() => {
-
-        fetch("http://localhost:5000/api/get_netBalance")
-        .then(response => response.json())
-        .then(data => setNetBalanceHeader(data.netBalance))
-        .catch(error => console.error(error));
-
+    useEffect(() => { 
+        dispatch(fetchNetBalance)
     }, [props.pressedEnter, props.entriesChange, props.hasReset, props.updateSoldFlag, props.entryUpdated]);
 
-    const netBalanceClass = netBalanceHeader < 0 ? 'netBalanceNegative' : 'netBalancePositive';
+    const netBalanceClass = netBalance < 0 ? 'netBalanceNegative' : 'netBalancePositive';
     return(
         <>
             <h1>Balance:</h1>
-            <label className={netBalanceClass}>{netBalanceHeader}$</label>
+            <label className={netBalanceClass}>{netBalance}$</label>
         </>
     );
 }

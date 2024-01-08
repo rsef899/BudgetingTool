@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from "react";
 import './Functionality.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from "./store/slices";
+import { fetchItems, fetchNetBalance } from "./store/slices";
 
 function Table(props){
     const [tableHtml, setTableHtml] = useState("");
 
     const dispatch = useDispatch();
-    let items = useSelector(state => state.items.items)
+    let items = useSelector(state => state.mySlice.items)
 
     useEffect(() => {
       dispatch(fetchItems());
       console.log("Table")
       console.log(items)
-      fetch("http://localhost:5000/api/get_table")
-          .then(response => response.json())
-          .then(data => setTableHtml(data.table_html))
-          .catch(error => console.error(error));
+      
+      dispatch(fetchNetBalance())
     }, [props.entriesChange, props.entryUpdated]);
     return(
         /* This renders the string as an html command*/

@@ -77,24 +77,11 @@ def add_entry():
     cursor.execute(query, (data['name'], data['dateBought'], data['price']))
     connection.commit()
 
-    # old implementation
-    entriesList.append(data)
-    name = data['name']
-    date = data['dateBought']
-    price = data['price']
-    #add expense to the netBalance
-    global boughtPriceDictionary
-    boughtPriceDictionary[str(len(entriesList)-1)] = price
-    global netBalance 
-    netBalance -= float(price)
-
-    if (len(entriesList) != 0):
-        create_table()
     return {'message': 'Data recieved succesfully'}
 
 @app.route('/api/fetch_items', methods=['GET'])
 def fetch_items():
-    return jsonify(model.get_items(cursor))
+    return jsonify(model.get_items())
     #return Response(jsonify(model.get_items(cursor)), mimetype="application/json")
 
 

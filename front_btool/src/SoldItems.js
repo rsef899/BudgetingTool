@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from "./store/slices";
+import { fetchItems, fetchNetBalance } from "./store/slices";
 
 function SoldItems(props){
-    let items = useSelector(state => state.items.items)
+    let items = useSelector(state => state.mySlice.items)
     console.log(items)
     const dispatch = useDispatch();
 
@@ -34,6 +34,7 @@ function SoldItems(props){
             .then(data => {
                 console.log(data)
                 dispatch(fetchItems())
+                dispatch(fetchNetBalance())
             })
             .catch(error => console.error(error))
 

@@ -1,12 +1,12 @@
 // store.js
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { itemsReducer } from './slices'; // Adjust this path
+import { configureStore} from '@reduxjs/toolkit';
+import { mainReducer } from './slices'; // Adjust this path
 
 export const store = configureStore({
     reducer: {
-        items: itemsReducer,
+        mySlice: mainReducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware(),
+
 });
 
 export default store;
