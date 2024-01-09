@@ -4,8 +4,6 @@ import {set_net_balance, fetchNetBalance} from "./store/slices"
 
 
 function NetBalance(props){
-    const [netBalanceHeader, setNetBalanceHeader] = useState("");
-
     let netBalance = useSelector(state => state.mySlice.netBalance)
     const dispatch = useDispatch()
 

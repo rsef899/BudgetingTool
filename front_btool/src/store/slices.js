@@ -22,7 +22,8 @@ export const fetchNetBalance = createAsyncThunk(
 // Define an initial state
 const initialState = {
   items: [],
-  netBalance: 0
+  netBalance: 0,
+  editingCell: null
 };
 
 const slice = createSlice({
@@ -34,7 +35,13 @@ const slice = createSlice({
         },
         set_net_balance: (state, action) =>{
             state.netBalance = action.payload;
-        }
+        },
+        startEditing: (state, action) => {
+            state.editingCell = action.payload; // Payload should have cell identifier
+          },
+        stopEditing: (state) => {
+        state.editingCell = null;
+        },
     },
     //Used to handle the table async thunk
     extraReducers: (builder) => {
@@ -50,5 +57,5 @@ const slice = createSlice({
     },
 });
 
-export const { set_items, set_net_balance } = slice.actions
+export const { set_items, set_net_balance, startEditing, stopEditing } = slice.actions
 export const mainReducer = slice.reducer; // Export the reducer as named export
