@@ -30,6 +30,10 @@ function Table(props){
         if (event.key === 'Enter') {
             event.preventDefault(); // Prevent the default Enter key behavior (e.g., form submission)
 
+            if (isNaN(event.target.value)) {
+                return; // Return early if it's not a number
+              }
+
             dispatch(updateItem({
                 item_id: item_id, 
                 column_name: column_name, 
@@ -79,6 +83,7 @@ function Table(props){
                                     defaultValue={item.date}
                                     onBlur={handleBlur}
                                     autoFocus
+                                    onKeyDown={(e) => handleUpdate(e, item.id, 'date')}
                                 />
                                 ) : (item.date)}
                         </td>
@@ -86,9 +91,13 @@ function Table(props){
                             {isEditing && item.id === isEditing.item_id && isEditing.col === 'price' ? (
                                     <input
                                     type="number"
+                                    min="0" 
+                                    step="0.01" 
+                                    max="10000"
                                     defaultValue={item.price.toFixed(2)}
                                     onBlur={handleBlur}
                                     autoFocus
+                                    onKeyDown={(e) => handleUpdate(e, item.id, 'price')}
                                 />
                                 ) : (item.price.toFixed(2))}
                             
