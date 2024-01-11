@@ -19,6 +19,21 @@ export const fetchNetBalance = createAsyncThunk(
     }
 )
 
+export const updateItem = createAsyncThunk(
+    'items/updateItem',
+    async ({item_id, column_name, new_value}) => {
+        const requestOptions = {
+            method: 'PATCH', // or 'POST' if you're creating or updating data
+            headers: {
+              'Content-Type': 'application/json', // Specify the content type
+            },
+            body: JSON.stringify({column_name: column_name, value: new_value}), // Convert your data to JSON and send it in the body
+        };
+        const response = await fetch(`http://localhost:5000/api/update_item/${item_id}`, requestOptions);
+        return { statusCode: response.status };
+    }
+)
+
 // Define an initial state
 const initialState = {
   items: [],
@@ -50,7 +65,7 @@ const slice = createSlice({
             // handle the fulfilled state
             state.items = action.payload;
         })
-        builder.addCase(fetchNetBalance.fulfilled, (state, action) => {
+        .addCase(fetchNetBalance.fulfilled, (state, action) => {
             // handle the fulfilled state
             state.netBalance = action.payload.netBalance;
         })

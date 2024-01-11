@@ -5,7 +5,6 @@ import Entry from './Entry';
 import Table from './Table';
 import SoldItems from './SoldItems';
 import NetBalance from './NetBalance';
-import UpdateInfo from './UpdateInfo';
 import ResetBack from './ResetBack';
 import LoadingScreen from './LoadingScreen';
 
@@ -68,14 +67,7 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
                           <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
                           updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
                         </div>
-                        
-                          {entriesChange ? (
-                            <div className='update-div'>
-                              <UpdateInfo entriesChange={entriesChange} pressedEnter={pressedEnter} updateEntryLog={updateEntryLog}
-                              setupdateSoldFlag={setupdateSoldFlag} setupdatedSoldIndex={setupdatedSoldIndex} 
-                              setChangedDetail={setChangedDetail} changedDetail={changedDetail} 
-                              entryUpdated={entryUpdated} />
-                              </div> ):(null)}  
+                          
                       </div>
                   
                 </div>

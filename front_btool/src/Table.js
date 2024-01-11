@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Functionality.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems, fetchNetBalance, startEditing, stopEditing } from "./store/slices";
+import { fetchItems, fetchNetBalance, startEditing, stopEditing, updateItem } from "./store/slices";
 
 function Table(props){
     const dispatch = useDispatch();
@@ -25,6 +25,22 @@ function Table(props){
     const handleBlur = () => {
         dispatch(stopEditing());
     };
+
+    const handleUpdate = (event, item_id, column_name) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default Enter key behavior (e.g., form submission)
+
+            dispatch(updateItem({
+                item_id: item_id, 
+                column_name: column_name, 
+                new_value: event.target.value
+            })).then(()=>{
+                dispatch(fetchItems())
+                dispatch(stopEditing())
+            });
+            
+          }
+    }
 
     return(
         /* This renders the string as an html command*/
@@ -52,6 +68,7 @@ function Table(props){
                                 defaultValue={item.name}
                                 onBlur={handleBlur}
                                 autoFocus
+                                onKeyDown={(e) => handleUpdate(e, item.id, 'name')}
                               />
                             ) : (item.name)}
                         </td>
