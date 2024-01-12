@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './Functionality.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems, fetchNetBalance, startEditing, stopEditing, updateItem } from "./store/slices";
+import { fetchItems, fetchNetBalance, startEditing, stopEditing, updateItem, renderTempEdit } from "./store/slices";
 
 function Table(props){
     const dispatch = useDispatch();
     let items = useSelector(state => state.mySlice.items)
     let isEditing = useSelector(state => state.mySlice.editingCell)
+    let tempEdit = useSelector(state => state.mySlice.renderTempEdit)
 
     useEffect(() => {
       dispatch(fetchItems());
@@ -27,25 +28,21 @@ function Table(props){
     };
 
     const handleUpdate = (event, item_id, column_name) => {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Prevent the default Enter key behavior (e.g., form submission)
+  
+        event.preventDefault(); // Prevent the default Enter key behavior (e.g., form submission)
 
-            if ((column_name === "price" || column_name === "sold_price") && isNaN(event.target.value)) {
-                console.log("Not a number")
-                return; // Return early if it's not a number
-              }
-
-            dispatch(updateItem({
-                item_id: item_id, 
-                column_name: column_name, 
-                new_value: event.target.value
-            })).then(()=>{
-                dispatch(stopEditing())
-                dispatch(fetchItems())
-                if (column_name === "price" || column_name === "sold_price"){ dispatch(fetchNetBalance()) }
-            });
+        dispatch(updateItem({
+            item_id: item_id, 
+            column_name: column_name, 
+            new_value: event.target.elements[0].value
+        })).then(()=>{
+            dispatch(stopEditing())
+            dispatch(renderTempEdit(event.target.elements[0].value))
+            dispatch(fetchItems())
+            if (column_name === "price" || column_name === "sold_price"){ dispatch(fetchNetBalance()) }
+        });
             
-          }
+
     }
 
     return(
@@ -69,28 +66,31 @@ function Table(props){
                         </td>
                         <td onDoubleClick = {() => handleCellClick(item, 'name')}>
                             {isEditing && item.id === isEditing.item_id && isEditing.col === 'name' ? (
+                            <form onSubmit={(e) => handleUpdate(e, item.id, 'name')}>
                                 <input
                                 type="text"
                                 defaultValue={item.name}
                                 onBlur={handleBlur}
                                 autoFocus
-                                onKeyDown={(e) => handleUpdate(e, item.id, 'name')}
                               />
+                            </form>
                             ) : (item.name)}
                         </td>
                         <td onDoubleClick = {() => handleCellClick(item, 'date')}>
                             {isEditing && item.id === isEditing.item_id && isEditing.col === 'date' ? (
+                                <form onSubmit={(e) => handleUpdate(e, item.id, 'date')}>
                                     <input
                                     type="text"
                                     defaultValue={item.date}
                                     onBlur={handleBlur}
                                     autoFocus
-                                    onKeyDown={(e) => handleUpdate(e, item.id, 'date')}
-                                />
+                                    />
+                                </form>
                                 ) : (item.date)}
                         </td>
                         <td onDoubleClick={() => handleCellClick(item, 'price')}>
                             {isEditing && item.id === isEditing.item_id && isEditing.col === 'price' ? (
+                                 <form onSubmit={(e) => handleUpdate(e, item.id, 'price')}>
                                     <input
                                     type="number"
                                     min="0" 
@@ -99,8 +99,8 @@ function Table(props){
                                     defaultValue={item.price.toFixed(2)}
                                     onBlur={handleBlur}
                                     autoFocus
-                                    onKeyDown={(e) => handleUpdate(e, item.id, 'price')}
-                                />
+                                    />
+                                </form>
                                 ) : (item.price.toFixed(2))}
                             
                         </td>

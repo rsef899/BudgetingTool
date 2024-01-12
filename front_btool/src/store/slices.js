@@ -38,7 +38,8 @@ export const updateItem = createAsyncThunk(
 const initialState = {
   items: [],
   netBalance: 0,
-  editingCell: null
+  editingCell: null,
+  unConfirmedEdit: null
 };
 
 const slice = createSlice({
@@ -57,6 +58,9 @@ const slice = createSlice({
         stopEditing: (state) => {
         state.editingCell = null;
         },
+        renderTempEdit: (state, action) =>{
+            state.unConfirmedEdit = action.payload;
+        }
     },
     //Used to handle the table async thunk
     extraReducers: (builder) => {
@@ -72,5 +76,5 @@ const slice = createSlice({
     },
 });
 
-export const { set_items, set_net_balance, startEditing, stopEditing } = slice.actions
+export const { set_items, set_net_balance, startEditing, stopEditing, renderTempEdit } = slice.actions
 export const mainReducer = slice.reducer; // Export the reducer as named export
