@@ -30,7 +30,8 @@ function Table(props){
         if (event.key === 'Enter') {
             event.preventDefault(); // Prevent the default Enter key behavior (e.g., form submission)
 
-            if (isNaN(event.target.value)) {
+            if ((column_name === "price" || column_name === "sold_price") && isNaN(event.target.value)) {
+                console.log("Not a number")
                 return; // Return early if it's not a number
               }
 
@@ -39,8 +40,9 @@ function Table(props){
                 column_name: column_name, 
                 new_value: event.target.value
             })).then(()=>{
-                dispatch(fetchItems())
                 dispatch(stopEditing())
+                dispatch(fetchItems())
+                if (column_name === "price" || column_name === "sold_price"){ dispatch(fetchNetBalance()) }
             });
             
           }
