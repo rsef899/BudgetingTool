@@ -56,9 +56,7 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
         ):(
           <>
             <Header />  
-            <div class="main-grid-container">   
-                <div className='grid-container-mover'>
-                  <div class="grid-container">     
+            <div class="main-grid-container">     
                       <div className='entry-div'>
                         <Entry addEntryChange ={addEntryChange} />
                       </div>
@@ -67,10 +65,6 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
                           <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
                           updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
                         </div>
-                          
-                      </div>
-                  
-                </div>
                 <div className="entire-top-table-div">
                       {!entriesChange ? (
                         <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(

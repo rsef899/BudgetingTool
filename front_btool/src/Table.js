@@ -10,10 +10,7 @@ function Table(props){
     let tempEdit = useSelector(state => state.mySlice.renderTempEdit)
 
     useEffect(() => {
-      dispatch(fetchItems());
-      console.log("Table")
-      console.log(items)
-      
+      dispatch(fetchItems());      
       dispatch(fetchNetBalance())
     }, [props.entriesChange, props.entryUpdated]);
 
@@ -52,7 +49,7 @@ function Table(props){
             <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th className="idTh">ID</th>
                     <th>Name</th>
                     <th>Date</th>
                     <th>Price</th>
