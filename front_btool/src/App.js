@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Header from './Header';
 import Entry from './Entry';
 import Table from './Table';
-import SoldItems from './SoldItems';
 import NetBalance from './NetBalance';
 import ResetBack from './ResetBack';
 import LoadingScreen from './LoadingScreen';
@@ -87,9 +86,6 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
                       //only one componant can be returned in a ternery operator hence <>, allows both to render 
                       <>
                         <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
-                        <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} 
-                        updateSoldFlag={updateSoldFlag} setupdateSoldFlag={setupdateSoldFlag} updatedSoldIndex={updatedSoldIndex}
-                        changedDetail={changedDetail} />
                       </>)}
               </div>
             </div>

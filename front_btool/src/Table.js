@@ -7,7 +7,7 @@ function Table(props){
     const dispatch = useDispatch();
     let items = useSelector(state => state.mySlice.items)
     let isEditing = useSelector(state => state.mySlice.editingCell)
-    let tempEdit = useSelector(state => state.mySlice.renderTempEdit)
+    let tempEdit = useSelector(state => state.mySlice.unConfirmedEdit)
 
     useEffect(() => {
       dispatch(fetchItems());      
@@ -42,6 +42,32 @@ function Table(props){
 
     }
 
+    // event listener function for the sold entry boxes
+    function handleKeyPress(event, index, column_name) {
+        event.preventDefault();
+
+            console.log("Enter pressed in input at index", index);
+
+            fetch(`http://localhost:5000/api/recieve_sale_item/${index}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({sold_price : event.target.elements[0].value})
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                dispatch(renderTempEdit(event.target.elements[0].value))
+                dispatch(stopEditing())
+                dispatch(fetchItems())
+                dispatch(fetchNetBalance())
+            })
+            .catch(error => console.error(error))
+
+                //Table update
+    }
+
     return(
         /* This renders the string as an html command*/
         /*<div dangerouslySetInnerHTML={{ __html: tableHtml }} className="itemsTable"></div>*/
@@ -53,6 +79,7 @@ function Table(props){
                     <th>Name</th>
                     <th>Date</th>
                     <th>Price</th>
+                    <th>Sold Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,6 +126,21 @@ function Table(props){
                                     />
                                 </form>
                                 ) : (item.price.toFixed(2))} 
+                        </td>
+                        <td onDoubleClick = {() => handleCellClick(item, 'sold_price')}>
+                                        {(isEditing && item.id === isEditing.item_id && isEditing.col === 'sold_price') || !item.sold_price ? (
+                                        <form onSubmit={(e) => handleKeyPress(e, item.id, 'sold_price')}>
+                                            <input
+                                            type="number" 
+                                            min= "0" 
+                                            max = "10000"
+                                            step="0.01"
+                                            defaultValue={item.sold_price}
+                                            onBlur={handleBlur}
+                                            autoFocus
+                                        />
+                                        </form>
+                                        ) : (item.sold_price)}
                         </td>
                     </tr>
                 ))
