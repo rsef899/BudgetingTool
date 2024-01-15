@@ -3,7 +3,7 @@
 .main-grid-container {
   display: grid;
   grid-template-columns: 60vw;
-  grid-template-rows: 200px 10vw auto;
+  grid-template-rows: 200px 100px auto;
   grid-gap: 15px;
   justify-content: center;
   margin: 0 auto;
@@ -21,6 +21,8 @@
     border-radius: 10px;
     border: 2px solid #a1a1a1;
     font-family: 'Rubik', sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .entry-div label {
@@ -67,6 +69,7 @@
   .net-balance-div label{
     margin: 5px;
     font-size: 6vw;
+    padding-left: 200px;
   }
   
   .netBalancePositive{
@@ -125,8 +128,7 @@
     flex: 1;
   }
   .itemsTable table {
-    padding-top: 50px;
-    padding-left: 20px;
+    padding: 50px;
 
   }
   .entire-top-table-div table {
@@ -137,52 +139,23 @@
     padding: 12px;
     height: 20px;
   }
-  .idTh {
-    width: 10px !important;
-  }
   /*Table 1 column widths*/
   .itemsTable th:first-child,
   .itemsTable td:first-child {
     width: 40%;
   }
-  .itemsTable th:nth-child(2),
-  .itemsTable td:nth-child(2) {
-    width: 20%;
-  }
-  .itemsTable th:nth-child(3),
-  .itemsTable td:nth-child(3) {
-    width: 20%;
-  }
-/* sold part*/
-.soldItemsTable{
-    padding-top: 50px;
-    margin-right: 20px;
-  }
-  
-  .soldItemsTable td {
-    height: 44px;
-    width: 50px;
-    padding: 0px;
-  }
-  
-  .soldItemsTable td label{
-    padding: 12px;
-    width: 50px;
-  }
-  
-  .soldItemsTable td form{
 
-    display: table-row;
-  }
+  .itemsTable input, .itemsTable label {
+    width: 50%; /* Makes the element fill the entire cell */
+}
 
-  .soldItemsTable td input{
-    height: 20px;
-    width: 50px;
-    
-  }
+  .itemsTable th.idTh, .itemsTable td:nth-child(1) {
+    width: 50px;  /* Adjust this width as needed */
+}
 
-  .soldItemsTable th {
-    width: 70px;
-  }
+.itemsTable th:not(.idTh) {
+  width: 800px;
+}
+
 
   
