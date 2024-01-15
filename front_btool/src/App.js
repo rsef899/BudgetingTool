@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css'; 
 import React, { useState, useEffect } from "react";
 import Header from './Header';
 import Entry from './Entry';
@@ -46,6 +46,22 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
   //changed detail
   const [changedDetail, setChangedDetail] = useState('');
 
+
+  const handleResize = () => {
+    if (window.innerWidth < 768) {
+        require('./Functionality-Small.css');
+        console.log("resize detected")
+    } else {
+        require('./Functionality-Big.css');
+    } 
+  }
+
+  // Call it initially and whenever the window resizes
+  handleResize();
+  window.addEventListener('resize', handleResize);
+
+
+
   return (
     <div>
       {onHomeScreen ? (
@@ -57,27 +73,27 @@ const[onHomeScreen, setOnHomeScreen] = useState(true)
           <>
             <Header />  
             <div class="main-grid-container">     
-                      <div className='entry-div'>
-                        <Entry addEntryChange ={addEntryChange} />
-                      </div>
-                      
-                        <div className='net-balance-div'>
-                          <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
-                          updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
-                        </div>
-                <div className="entire-top-table-div">
-                      {!entriesChange ? (
-                        <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
-                        //only one componant can be returned in a ternery operator hence <>, allows both to render 
-                        <>
-                          <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
-                          <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} 
-                          updateSoldFlag={updateSoldFlag} setupdateSoldFlag={setupdateSoldFlag} updatedSoldIndex={updatedSoldIndex}
-                          changedDetail={changedDetail} />
-                        </>)}
-                    </div>
+              <div className='entry-div'>
+                <Entry addEntryChange ={addEntryChange} />
+              </div>
+              
+                <div className='net-balance-div'>
+                  <NetBalance pressedEnter={pressedEnter} entriesChange={entriesChange} hasReset={hasReset} 
+                  updateSoldFlag={updateSoldFlag} entryUpdated={entryUpdated}/>
+                </div>
+              <div className="entire-top-table-div">
+                    {!entriesChange ? (
+                      <h1 className='EmptyEntryHeader'>Enter an entry to get started</h1>):(
+                      //only one componant can be returned in a ternery operator hence <>, allows both to render 
+                      <>
+                        <Table entriesChange={entriesChange} entryUpdated={entryUpdated}/>
+                        <SoldItems entriesChange={entriesChange} prop2={addEnterPressedChange} 
+                        updateSoldFlag={updateSoldFlag} setupdateSoldFlag={setupdateSoldFlag} updatedSoldIndex={updatedSoldIndex}
+                        changedDetail={changedDetail} />
+                      </>)}
+              </div>
             </div>
-            </>
+          </>
         )}
      
       

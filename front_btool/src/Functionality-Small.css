@@ -59,9 +59,13 @@
     font-family: 'Rubik', sans-serif;
   }
 
+  .net-balance-div h1 {
+    margin: 5px;
+  }
+
   .net-balance-div label{
-    font-size: 99px;
-    padding-left: 7%;
+    margin: 5px;
+    font-size: 25vw;
   }
   
   .netBalancePositive{

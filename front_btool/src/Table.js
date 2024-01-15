@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './Functionality.css';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, fetchNetBalance, startEditing, stopEditing, updateItem, renderTempEdit } from "./store/slices";
 
@@ -98,8 +98,7 @@ function Table(props){
                                     autoFocus
                                     />
                                 </form>
-                                ) : (item.price.toFixed(2))}
-                            
+                                ) : (item.price.toFixed(2))} 
                         </td>
                     </tr>
                 ))
