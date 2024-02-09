@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, fetchNetBalance, startEditing, stopEditing, updateItem, renderTempEdit } from "./store/slices";
@@ -7,7 +7,6 @@ function Table(props){
     const dispatch = useDispatch();
     let items = useSelector(state => state.mySlice.items)
     let isEditing = useSelector(state => state.mySlice.editingCell)
-    let tempEdit = useSelector(state => state.mySlice.unConfirmedEdit)
 
     useEffect(() => {
       dispatch(fetchItems());      
@@ -16,6 +15,7 @@ function Table(props){
 
     //Table update
     const handleCellClick = (item, columnName) => {
+        console.log(items)
         console.log(`Clicked on item ${item.id}, Column: ${columnName}`);
         dispatch(startEditing({item_id : item.id, col : columnName}));
       };
@@ -64,9 +64,9 @@ function Table(props){
                 dispatch(fetchNetBalance())
             })
             .catch(error => console.error(error))
-
-                //Table update
     }
+
+    let counter = 0;
 
     return(
         /* This renders the string as an html command*/
@@ -83,7 +83,8 @@ function Table(props){
                 </tr>
             </thead>
             <tbody>
-                {items.length > 0 ? (items.map(item => (
+                {items.length > 0 ? (
+                    items.map(item => (
                     <tr key={item.id}>
                         <td>
                             {item.id}
@@ -120,7 +121,7 @@ function Table(props){
                                     min="0" 
                                     step="0.01" 
                                     max="10000"
-                                    defaultValue={item.price.toFixed(2)}
+                                    defaultValue={item.price}
                                     onBlur={handleBlur}
                                     autoFocus
                                     />
@@ -140,12 +141,14 @@ function Table(props){
                                             autoFocus
                                         />
                                         </form>
-                                        ) : (item.sold_price)}
+                                        ) : (item.sold_price.toFixed(2))}
                         </td>
                     </tr>
                 ))
               ) : (
-                <td>Getting the Items</td>
+                <tr>
+                    <td>Getting the Items</td>
+                </tr>
               )}
             </tbody>
         </table>

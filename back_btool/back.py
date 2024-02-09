@@ -48,15 +48,6 @@ def check_name_dupes():
     #if name not found return false
     return {'Outcome': False}
 
-#Creates the entries table html string
-def create_table():
-    global html
-    global entriesList
-    html = "<table><thead><tr><th>Name</th><th>Date</th><th>Price</th></tr></thead><tbody>"
-    for entry in entriesList:
-        html += f"<tr><td>{entry['name']}</td><td>{entry['dateBought']}</td><td>{entry['price']}</td></tr>"
-    html += "</tbody></table>"
-
 
 #address of function dosnt include port as it is deined in the function
 @app.route('/api/add_entry', methods=['POST'])
@@ -81,7 +72,7 @@ def add_entry():
 
 @app.route('/api/fetch_items', methods=['GET'])
 def fetch_items():
-    return jsonify(model.get_items())
+    return jsonify(model.get_items(cursor))
     #return Response(jsonify(model.get_items(cursor)), mimetype="application/json")
 
 
