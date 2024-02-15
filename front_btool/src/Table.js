@@ -57,7 +57,6 @@ function Table(props){
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 dispatch(renderTempEdit(event.target.elements[0].value))
                 dispatch(stopEditing())
                 dispatch(fetchItems())
