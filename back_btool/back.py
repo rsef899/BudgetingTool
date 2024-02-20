@@ -129,6 +129,13 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
     return response
 
+### ########
+### PC Page
+### ########
+
+@app.route('/api/fetch_pcs',methods=['GET'])
+def fetch_pcs():
+    return jsonify(model.get_items)
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':

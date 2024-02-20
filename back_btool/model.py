@@ -49,6 +49,11 @@ def update_item(cursor, request, item_id):
         return make_response('', 500)
     
 
-        
-
-    
+### PC Page Functions ###
+def get_pcs(cursor):
+    query = "SELECT * from pcs"
+    pcs = cursor.execute(query).fetchall()
+    fields = ['id', 'name', 'date', 'price', 'sold_price']
+    items = [dict(zip(fields, row)) for row in pcs]
+    print(items)
+    return items
