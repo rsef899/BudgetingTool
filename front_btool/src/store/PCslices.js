@@ -8,7 +8,7 @@ export const fetchPCs = createAsyncThunk(
     }
 );
 
-
+// Define an initial state
 const initialState = {
     pcs: [],
     selectedPC: null,

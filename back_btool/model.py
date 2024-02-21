@@ -51,9 +51,58 @@ def update_item(cursor, request, item_id):
 
 ### PC Page Functions ###
 def get_pcs(cursor):
+    cursor.row_factory = sqlite3.Row  # Set row_factory to sqlite3.Row to fetch rows as dictionaries
     query = "SELECT * from pcs"
     pcs = cursor.execute(query).fetchall()
-    fields = ['id', 'name', 'date', 'price', 'sold_price']
-    items = [dict(zip(fields, row)) for row in pcs]
-    print(items)
-    return items
+    
+    result = []
+    for pc in pcs:
+        pc_id = pc['id']  # Accessing dictionary keys should work now
+        
+        # Query to fetch components for the current PC
+        component_query = """
+            SELECT components.component_type, components.name, components.price 
+            FROM components 
+            JOIN pc_components ON components.id = pc_components.component_id 
+            WHERE pc_components.pc_id = ?
+        """
+        components = cursor.execute(component_query, (pc_id,)).fetchall()
+        
+        # Convert rows to dictionaries
+        pc_dict = dict(pc)
+        pc_dict['components'] = [dict(row) for row in components]
+        
+        # Calculate total price for the PC
+        total_price = sum(component['price'] for component in pc_dict['components'])
+        pc_dict['total_price'] = total_price
+        
+        result.append(pc_dict)
+    
+    removeDupes(cursor)
+    return result
+
+
+def removeDupes(cursor):
+   # Removing any duplicate builds (if they got the same name)
+    query = """
+        SELECT name, COUNT(*) as count
+        FROM PCs
+        GROUP BY name
+        HAVING COUNT(*) > 1
+    """
+    duplicate_builds = cursor.execute(query).fetchall()
+    
+    # Step 3: Write a SQL query to delete the duplicate builds
+    delete_query = """
+        DELETE FROM PCs
+        WHERE name = ?
+    """
+    
+    for build in duplicate_builds:
+        build_name = build['name']
+        # Keep one instance of the build and delete the rest
+        cursor.execute(delete_query, (build_name,))
+    
+    # Commit the changes
+    cursor.connection.commit()
+

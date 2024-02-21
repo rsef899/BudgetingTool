@@ -135,7 +135,29 @@ def after_request(response):
 
 @app.route('/api/fetch_pcs',methods=['GET'])
 def fetch_pcs():
-    return jsonify(model.get_items)
+    return jsonify(model.get_pcs(cursor))
+
+@app.route('/api/submit_pc',methods=['POST'])
+def submit_pc():
+    pc_data = request.json.get('pc_data')
+    pc_components = request.json.get('pc_components')
+
+    
+    cursor.execute("INSERT INTO PCs (name) VALUES (?)", (pc_data['name'],))
+    pc_id = cursor.lastrowid
+
+    for component in pc_components:
+        cursor.execute("INSERT INTO COMPONENTS (component_type,name,price) VALUES (?,?,?)",(component['type'],component['name'],component['price']))
+        component_id = cursor.lastrowid
+        cursor.execute("INSERT INTO PC_COMPONENTS (pc_id,component_id) VALUES (?,?)",(pc_id,component_id))
+
+    
+    connection.commit()
+    
+    return {'message': 'PC Submitted'}
+
+        
+
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
