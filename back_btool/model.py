@@ -78,7 +78,7 @@ def get_pcs(cursor):
         
         result.append(pc_dict)
     
-    removeDupes(cursor)
+    #removeDupes(cursor)
     return result
 
 

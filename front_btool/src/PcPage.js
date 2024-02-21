@@ -158,6 +158,13 @@ function PcPage(){
                     {pcs.map(pc => (
                         <li key={pc.id}>
                             {pc.name} - Total Price: ${pc.total_price}
+                            <ul>
+                                {pc.components.map(component => (
+                                    <li key={component.id}>
+                                        {component.component_type}: {component.name} - Price: ${component.price}
+                                    </li>
+                                ))}
+                            </ul>
                         </li>
                     ))}
                 </ul>
