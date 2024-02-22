@@ -152,23 +152,23 @@ function PcPage(){
                 </div>
             )}
             {/* Display fetched PCs */}
-            <div className="pcsList">
-                <h2>Fetched PCs</h2>
-                <ul>
-                    {pcs.map(pc => (
-                        <li key={pc.id}>
-                            {pc.name} - Total Price: ${pc.total_price}
-                            <ul>
-                                {pc.components.map(component => (
-                                    <li key={component.id}>
-                                        {component.component_type}: {component.name} - Price: ${component.price}
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                <div className="pcsList">
+                    <h2>Fetched PCs</h2>
+                    <ul>
+                        {pcs.map(pc => (
+                            <li key={pc.id} className="pcBox">
+                                {pc.name} - Total Price: ${pc.total_price}
+                                <ul>
+                                    {pc.components.map(component => (
+                                        <li key={component.id} className = "componentListLayout">
+                                            {component.component_type}: {component.name} - Price: ${component.price}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
         </div>
         
 
