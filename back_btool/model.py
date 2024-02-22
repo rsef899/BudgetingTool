@@ -52,12 +52,13 @@ def update_item(cursor, request, item_id):
 ### PC Page Functions ###
 def get_pcs(cursor):
     cursor.row_factory = sqlite3.Row  # Set row_factory to sqlite3.Row to fetch rows as dictionaries
-    query = "SELECT * from pcs"
+    
+    query = "SELECT * FROM pcs"
     pcs = cursor.execute(query).fetchall()
     
     result = []
     for pc in pcs:
-        pc_id = pc['id']  # Accessing dictionary keys should work now
+        pc_dict = dict(pc)
         
         # Query to fetch components for the current PC
         component_query = """
@@ -66,10 +67,9 @@ def get_pcs(cursor):
             JOIN pc_components ON components.id = pc_components.component_id 
             WHERE pc_components.pc_id = ?
         """
-        components = cursor.execute(component_query, (pc_id,)).fetchall()
+        components = cursor.execute(component_query, (pc_dict['id'],)).fetchall()
         
         # Convert rows to dictionaries
-        pc_dict = dict(pc)
         pc_dict['components'] = [dict(row) for row in components]
         
         # Calculate total price for the PC
@@ -78,7 +78,6 @@ def get_pcs(cursor):
         
         result.append(pc_dict)
     
-    #removeDupes(cursor)
     return result
 
 
