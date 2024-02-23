@@ -157,7 +157,12 @@ def submit_pc():
     return {'message': 'PC Submitted'}
 
         
+@app.route('/api/update_pc',methods=['PUT'])
+def update_pc():
+    pc_id = request.json['pcId']
+    edited = request.json['editedPCData']
 
+    
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':

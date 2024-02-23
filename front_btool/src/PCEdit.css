@@ -1,0 +1,66 @@
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black overlay */
+    z-index: 999; /* ensure it appears above other content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Modal content */
+.modal {
+    position: relative; /* Set position to relative */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 50%; /* adjust width as needed */
+    min-height: 20%;
+    max-height: 80%; /* adjust height as needed */
+    overflow-y: auto; /* enable scrolling if content overflows */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+
+}
+
+/* Add new component section */
+.new-components {
+    width: 30%; /* Adjust width as needed */
+    padding: 20px; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding and border in width */
+    position: absolute; /* Set position to absolute */
+    top: 20px; /* Adjust top distance from the modal's top */
+    right: 20px; /* Adjust right distance from the modal's right */
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #888;
+}
+
+.componentDropdown {
+    margin-left: auto;
+    display: flex;
+}
+
+.button-container {
+    margin-top: 10px; /* Moves the button container to the bottom */
+    display: flex;
+    justify-content: flex-end;
+}
+/* 
+/* Style for buttons */
+.button-container button {
+    margin-left: 10px; /* Add some space between buttons */
+} 

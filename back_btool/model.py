@@ -67,7 +67,7 @@ def get_pcs(cursor):
             JOIN pc_components ON components.id = pc_components.component_id 
             WHERE pc_components.pc_id = ?
         """
-        components = cursor.execute(component_query, (pc_dict['id'],)).fetchall()
+        components = cursor.execute(component_query, (pc['id'],)).fetchall()
         
         # Convert rows to dictionaries
         pc_dict['components'] = [dict(row) for row in components]

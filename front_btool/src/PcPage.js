@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Header from './Header';
+import PCEntry from './PCEntry';
+import PCEdit from './PCEdit.js';
 
 function PcPage(){
     // States
@@ -10,6 +12,7 @@ function PcPage(){
     const [componentPrice, setComponentPrice] = useState('');
     const [pcComponents, setPcComponents] = useState([]);
     const [pcs,setPcs] = useState([]);
+    const [editPC, setEditPC] = useState(null);
 
     // Useful Functions
 
@@ -92,6 +95,18 @@ function PcPage(){
             })
             .catch(error => console.error('Error fetching PCs',error))
     };
+    
+
+    // Function to handle the click event of a PCEntry
+    const handleClick = (pcId) => {
+        const selectedPC = pcs.find(pc => pc.id === pcId);
+        setEditPC(selectedPC);
+    };
+
+    // Function to close the PCEdit screen
+    const handleCloseEdit = () => {
+        setEditPC(null);
+    };
 
 
     useEffect(() => {
@@ -153,21 +168,14 @@ function PcPage(){
             )}
             {/* Display fetched PCs */}
                 <div className="pcsList">
-                    <h2>Fetched PCs</h2>
-                    <ul>
+                    <h2>PC Builds</h2>
+                    <div className="pcCardContainer">
                         {pcs.map(pc => (
-                            <li key={pc.id} className="pcBox">
-                                {pc.name} - Total Price: ${pc.total_price}
-                                <ul>
-                                    {pc.components.map(component => (
-                                        <li key={component.id} className = "componentListLayout">
-                                            {component.component_type}: {component.name} - Price: ${component.price}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
+                            <PCEntry key={pc.id} pc={pc} onClick={handleClick} /> // Pass onClick handler to PCEntry
                         ))}
-                    </ul>
+                    </div>
+
+                    {editPC && <PCEdit pc={editPC} onClose={handleCloseEdit}/>}
                 </div>
         </div>
         
