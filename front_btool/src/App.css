@@ -27,7 +27,6 @@ header {
 
 }
 
-
 .popup {
   position: absolute;
   background-color: #f9f9f9;
@@ -48,18 +47,45 @@ header {
 .pcBox {
   display: flex;
   width: 80%;
-  max-width: 600px;
-  height: 100px;
+  max-width: 650px;
+  height: 50%;
+  max-height: 600px;
   border: 2px solid #333;
   border-radius: 8px;
   padding: 10px;
-  background-color: #e4e4e4;
+  background-color: #fcfbf9;
   box-shadow: 0 0 10px rgba (0,0,0,0.1);
-  margin-bottom: 10px;
+  margin-bottom: 7px;
+  margin-left: 5px;
   cursor:pointer;
   
 }
 
+.pcName {
+  margin-bottom: 5px;
+}
+
+.PcPageMainDiv {    /*moving the title of page */
+  margin-left: 2px;
+}
+
+.total_price {
+  margin-left: 1px;
+  font-weight: 600;
+}
+
+.pcsList {
+  border: 2px solid #000;
+  margin: 1px;
+  padding: 4px;
+  background-color: #fffced;
+}
+
+.componentListLayout {
+  font-weight: 400; 
+}
+
+/* moving list display in pop-up */ 
 .pcComponentList {
   margin-top: 10px;
   
@@ -70,9 +96,6 @@ header {
   
 }
 
-/*.componentListLayout {
-  display: flex;
-}*/
 
 
 
