@@ -80,7 +80,7 @@ const PCEdit = ({ pc, onClose }) => {
             });
     
             // Use updatedPC.components instead of editedPC.components
-            const addPromises = newComponentList.components.map(component => {
+            const addPromises = newComponentList.map(component => {
                 return fetch('http://localhost:5000/api/add_component', {
                     method: 'POST',
                     headers: {

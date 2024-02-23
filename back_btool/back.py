@@ -166,6 +166,7 @@ def update_pc():
         price = component.get('price')
         
         response = model.edit_component(cursor,component['id'],name,price,pc_id)
+    connection.commit()
     return {'message': 'Finished successfully'}
 
 
@@ -174,15 +175,22 @@ def update_pc():
 def delete_component():
     component_id = request.json['componentId']
     response = model.delete_component(cursor,component_id)
+    connection.commit()
     return (response)
 
 @app.route('/api/add_component',methods=['POST'])
 def add_component():
-    component_name = request.json['component']['name']
-    component_price = request.json['component']['price']
-    pc_id = request.json['pcId']
-    response = model.add_component(cursor,component_name,component_price,pc_id)
-    return jsonify(response)
+    try:
+        component_name = request.json['component']['name']
+        component_type = request.json['component']['component_type']
+        component_price = request.json['component']['price']
+        pc_id = request.json['pcID']
+        response = model.add_component(cursor, component_type, component_name, component_price, pc_id)
+        connection.commit()
+        return jsonify({"message": "Component added successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to add component"}), 500
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':

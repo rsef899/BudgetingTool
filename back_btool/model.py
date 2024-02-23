@@ -95,18 +95,20 @@ def edit_component(cursor, id, name, price, pc_id):
 def delete_component(cursor,id):
     try:
         cursor.execute("DELETE FROM components WHERE id = ?", (id,))
-        return make_response('Successfully deleted',200)
+        cursor.execute("DELETE FROM pc_components WHERE component_id = ?",(id,))
+        return jsonify({'message': 'Component successfully deleted'}), 204
     except:
         return make_response(" ",500)
-def add_component(cursor,name,price,pc_id):
+def add_component(cursor, component_type, name, price, pc_id):
     try:
-        cursor.execute("INSERT INTO components (name,price) VALUES (?,?)",(name,price))
+        cursor.execute("INSERT INTO components (component_type, name, price) VALUES (?, ?, ?)", (component_type, name, price))
         component_id = cursor.lastrowid
-        cursor.execute("INSERT INTO pc_components (pc_id, component_id) VALUES (?,?)",(pc_id,component_id))
+        cursor.execute("INSERT INTO pc_components (pc_id, component_id) VALUES (?, ?)", (pc_id, component_id))
+        return {"message": "Component added successfully"}, 200
+    except Exception as e:
+        print(e)
+        return {"error": "Failed to add component"}, 500
 
-        return make_response('Successfully added',204)
-    except:
-        return make_response(" ",500)
 def removeDupes(cursor):
    # Removing any duplicate builds (if they got the same name)
     query = """
