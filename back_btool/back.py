@@ -160,9 +160,29 @@ def submit_pc():
 @app.route('/api/update_pc',methods=['PUT'])
 def update_pc():
     pc_id = request.json['pcId']
-    edited = request.json['editedPCData']
+    components = request.json['editedPCData']['components']
+    for component in components:
+        name = component.get('name')
+        price = component.get('price')
+        
+        response = model.edit_component(cursor,component['id'],name,price,pc_id)
+    return {'message': 'Finished successfully'}
 
-    
+
+
+@app.route('/api/delete_component',methods=['DELETE'])
+def delete_component():
+    component_id = request.json['componentId']
+    response = model.delete_component(cursor,component_id)
+    return (response)
+
+@app.route('/api/add_component',methods=['POST'])
+def add_component():
+    component_name = request.json['component']['name']
+    component_price = request.json['component']['price']
+    pc_id = request.json['pcId']
+    response = model.add_component(cursor,component_name,component_price,pc_id)
+    return jsonify(response)
 
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':

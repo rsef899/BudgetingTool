@@ -1,4 +1,4 @@
-from flask import Flask, make_response
+from flask import Flask, make_response,jsonify
 import sqlite3
 def connect_to_db():
     return sqlite3.connect('budgeter_db.sqlite', check_same_thread=False)
@@ -62,7 +62,7 @@ def get_pcs(cursor):
         
         # Query to fetch components for the current PC
         component_query = """
-            SELECT components.component_type, components.name, components.price 
+            SELECT id,components.component_type, components.name, components.price 
             FROM components 
             JOIN pc_components ON components.id = pc_components.component_id 
             WHERE pc_components.pc_id = ?
@@ -79,8 +79,34 @@ def get_pcs(cursor):
         result.append(pc_dict)
     
     return result
+def edit_component(cursor, id, name, price, pc_id):
+    query = """
+    UPDATE components
+    SET name = ?,
+        price = ?
+    WHERE id = ? AND id IN (
+        SELECT component_id FROM pc_components WHERE pc_id=? )"""
+    try:
+        cursor.execute(query, (name, price, id, pc_id))
+        return jsonify({'message': 'Component successfully updated'}), 200
+    except:
+        return jsonify({'message': 'Failed to update component'}), 500
 
+def delete_component(cursor,id):
+    try:
+        cursor.execute("DELETE FROM components WHERE id = ?", (id,))
+        return make_response('Successfully deleted',200)
+    except:
+        return make_response(" ",500)
+def add_component(cursor,name,price,pc_id):
+    try:
+        cursor.execute("INSERT INTO components (name,price) VALUES (?,?)",(name,price))
+        component_id = cursor.lastrowid
+        cursor.execute("INSERT INTO pc_components (pc_id, component_id) VALUES (?,?)",(pc_id,component_id))
 
+        return make_response('Successfully added',204)
+    except:
+        return make_response(" ",500)
 def removeDupes(cursor):
    # Removing any duplicate builds (if they got the same name)
     query = """
