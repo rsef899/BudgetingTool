@@ -106,6 +106,7 @@ function PcPage(){
     // Function to close the PCEdit screen
     const handleCloseEdit = () => {
         setEditPC(null);
+        fetch_pcs();
     };
 
 
