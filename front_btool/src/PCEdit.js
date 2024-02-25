@@ -4,7 +4,41 @@ const PCEdit = ({ pc, onClose }) => {
     const [editedPC, setEditedPC] = useState(pc);
     const [newComponent,setNewComponent] = useState({component_type:'',name:'',price:''});
     const [deletedComponents, setDeletedComponents] = useState([]);
-    const [newComponentList,setNewComponentList] = useState([]);
+    const [newComponentList,setNewComponentList] = useState([]);    
+    const [soldPrice,setSoldPrice] = useState(null);
+
+    const handleSave = () => {
+        handleSaveSale(soldPrice);
+    };
+
+    const handleSaveSale = (price) => {
+        setSoldPrice(price);
+        // Add a call to a function here to edit the salePC's sold_price here
+        fetch('http://localhost:5000/api/sold_pc', {
+            method:'PUT',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({'id':pc.id, 'price':soldPrice})
+        })
+        onClose();
+    }
+
+    const handleDeletePC = () => {
+        fetch('http://localhost:5000/api/delete_pc', {
+            method:'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(pc)
+        });
+        console.log(JSON.stringify(pc));
+        onClose();
+    }
+    
+    const setDelete = () => {
+        handleDeletePC();
+    }
 
     const handleChange = (e, index) => {
         const updatedComponents = [...editedPC.components];
@@ -151,9 +185,19 @@ const PCEdit = ({ pc, onClose }) => {
                             )}
                             
                         </div>
+                                <h2>Sold Price</h2>
+                                <input
+                                    type='number'
+                                    placeholder='Enter Sold Price'
+                                    value={soldPrice}
+                                    onChange={(e) => setSoldPrice(e.target.value)}
+                                />
+                                <button onClick={handleSave}>Save Price</button>
+
                         <div className="button-container">
                             <button type="submit">Save Changes</button>
                             <button type="discard" onClick={handleDiscardChanges}>Discard Changes</button>
+                            <button onClick={setDelete}>Delete PC</button>
                         </div>
                     </div>
                     

@@ -133,3 +133,17 @@ def removeDupes(cursor):
     # Commit the changes
     cursor.connection.commit()
 
+def delete_pc(cursor, id):
+    query = """
+        DELETE FROM PCs WHERE id = ?
+        
+    """
+    cursor.execute(query, (id,))
+  
+def save_sale(cursor, id, price):
+    query = """
+        UPDATE pcs
+        SET sold_price = ?
+        WHERE id = ? 
+    """
+    cursor.execute(query, (price, id,))

@@ -191,7 +191,38 @@ def add_component():
     except Exception as e:
         print(e)
         return jsonify({"error": "Failed to add component"}), 500
+    
 
+@app.route('/api/delete_pc', methods = ['DELETE'])
+def delete_pc():
+    try:
+        pc_id = request.json['id']
+        components = request.json['components'] #get components list in json string
+        print("This is pc id: \n")
+        print(pc_id)
+        response = model.delete_pc(cursor, pc_id)
+        for component in components: 
+            print(component['id'])
+            model.delete_component(cursor, component['id'])
+        connection.commit()
+        return jsonify({"message": "Component added successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to delete PC"}), 500
+
+
+@app.route('/api/sold_pc', methods = ['PUT'])
+def save_sale():
+    try:
+        id = request.json['id']
+        price = request.json['price']
+        response = model.save_sale(cursor, id, price)
+        connection.commit()
+        return jsonify({"message": "Sold price added successfully"}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Failed to delete PC"}), 500
+        
 #only run the application when the file is executed dierectly
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

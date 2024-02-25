@@ -20,6 +20,8 @@ const PCEntry = ({ pc,onClick }) => {
                             </li>
                         ))}
                     </ul>
+                    {pc.sold_price != null && <p> Sold Price: ${pc.sold_price}</p>}
+                    {pc.sold_price != null && <h3> Profit: ${pc.sold_price - pc.total_price} </h3>}
                 </div>
             </div>
         </div>
