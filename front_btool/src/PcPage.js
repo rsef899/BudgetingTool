@@ -2,9 +2,11 @@ import React, {useState, useEffect} from 'react';
 import Header from './Header';
 import PCEntry from './PCEntry';
 import PCEdit from './PCEdit.js';
-
+import SoldScreen from './SoldScreen';
 function PcPage(){
     // States
+    const [showSale,setShowSale] = useState(false);
+    const [soldPrice,setSoldPrice] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
     const [pcName,setPCName] = useState('');
     const [selectedComponent, setSelectedComponent] = useState('');
@@ -13,9 +15,41 @@ function PcPage(){
     const [pcComponents, setPcComponents] = useState([]);
     const [pcs,setPcs] = useState([]);
     const [editPC, setEditPC] = useState(null);
+    const [salePC, setSalePC] = useState(null);
 
     // Useful Functions
+    const handleDeletePC = (pc) => {
+        fetch('http://localhost:5000/api/delete_pc', {
+            method:'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(pc)
+        });
+        fetch_pcs();
+    }
 
+    const handleSalePopup = (pc) => {
+        setSalePC(pc);
+        setShowSale(true);
+    }
+    const handleClosePopup = () => {
+        setShowPopup(false);
+    }
+    const handleSaveSale = (price) => {
+        setSoldPrice(price);
+        // Add a call to a function here to edit the salePC's sold_price here
+        fetch('http://localhost:5000/api/sold_pc', {
+            method:'PUT',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(salePC)
+        })
+
+        handleClosePopup();
+        fetch_pcs();
+    }
     const togglePopup = () => {
         setShowPopup(!showPopup);
     };
@@ -172,10 +206,15 @@ function PcPage(){
                     <h2>PC Builds</h2>
                     <div className="pcCardContainer">
                         {pcs.map(pc => (
-                            <PCEntry key={pc.id} pc={pc} onClick={handleClick} /> // Pass onClick handler to PCEntry
+                            <div>
+                                <PCEntry key={pc.id} pc={pc} onClick={handleClick} />
+                                <button className='Sold_button' onClick={handleSalePopup}>Sold</button>
+                                <button onClick={handleDeletePC}>Delete PC</button>
+                            </div>
                         ))}
                     </div>
-
+                    
+                    {showSale && <SoldScreen onClose={handleClosePopup} onSave={handleSaveSale}/>}
                     {editPC && <PCEdit pc={editPC} onClose={handleCloseEdit}/>}
                 </div>
         </div>
