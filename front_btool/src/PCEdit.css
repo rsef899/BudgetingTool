@@ -10,7 +10,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
 /* Modal content */
@@ -24,21 +23,26 @@
     min-height: 20%;
     max-height: 80%; /* adjust height as needed */
     overflow-y: auto; /* enable scrolling if content overflows */
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack children vertically */
+   
+  
+    justify-content: space-between;
 
 }
 
-/* Add new component section */
+
 .new-components {
-    width: 30%; /* Adjust width as needed */
-    padding: 20px; /* Add padding for spacing */
-    box-sizing: border-box; /* Include padding and border in width */
-    position: absolute; /* Set position to absolute */
-    top: 20px; /* Adjust top distance from the modal's top */
-    right: 20px; /* Adjust right distance from the modal's right */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    top: 60px;
+    right: 10px;
+    box-sizing: border-box; 
 }
-
+.component-inputs {
+    margin-bottom: 10px;
+}
 /* Close button */
 .close {
     position: absolute;
@@ -55,9 +59,12 @@
 }
 
 .button-container {
-    margin-top: 10px; /* Moves the button container to the bottom */
+
+    position: absolute;
+    top:40px;
+    right: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 /* 
 /* Style for buttons */

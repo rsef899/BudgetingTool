@@ -183,16 +183,17 @@ const PCEdit = ({ pc, onClose }) => {
                                     <button type="button" onClick={handleAddComponent}>Add Component</button>
                                 </div>
                             )}
-                            
                         </div>
-                                <h2>Sold Price</h2>
-                                <input
-                                    type='number'
-                                    placeholder='Enter Sold Price'
-                                    value={soldPrice}
-                                    onChange={(e) => setSoldPrice(e.target.value)}
-                                />
-                                <button onClick={handleSave}>Save Price</button>
+                    </div>
+                    <div>
+                        <h2>Sold Price</h2>
+                        <input
+                            type='number'
+                            placeholder='Enter Sold Price'
+                            value={soldPrice}
+                            onChange={(e) => setSoldPrice(e.target.value)}
+                        />
+                        <button onClick={handleSave}>Save Price</button>
 
                         <div className="button-container">
                             <button type="submit">Save Changes</button>
@@ -201,8 +202,8 @@ const PCEdit = ({ pc, onClose }) => {
                         </div>
                     </div>
                     
-                </form>
-            </div>
+                    </form>
+                </div>
         </div>
     );
 };

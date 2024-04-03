@@ -127,44 +127,47 @@ function PcPage(){
             
 
             {showPopup && (
-                <div className='popup'>
-                    <span className='close' onClick={togglePopup}>&times;</span>
-                    <h2>Add PC</h2>
-                    {/* Dropdown to select component type */}
-                    <label>PC Name:</label>
-                    <input type='text' placeholder= 'PC Name' value={pcName} onChange={handlePCNameChange}></input>
-                    <select value={selectedComponent} onChange={handleComponentTypeChange}>
-                        <option value="">Select Component Type</option>
-                        <option value="CPU">CPU</option>
-                        <option value="GPU">GPU</option>
-                        <option value="SSD1">SSD1</option>
-                        <option value="SSD2">SSD2</option>
-                        <option value="RAM">RAM</option>
-                        <option value="Case">Case</option>
-                        <option value="Additional">Additional</option>
-                    </select>
-                    {selectedComponent && (
-                        <div>
-                            <input type="text" placeholder="Component Name" value={componentName} onChange={handleComponentNameChange} />
-                            <input type="number" placeholder="Component Price" value={componentPrice} onChange={handleComponentPriceChange} />
-                            <button onClick={handleAddComponent}>Add Component</button>
+                <div className='popup-overlay'>
+                    <div className='popup'>
+                        <span className='close' onClick={togglePopup}>&times;</span>
+                        <h2>Add PC</h2>
+                        {/* Dropdown to select component type */}
+                        <label>PC Name:</label>
+                        <input type='text' placeholder= 'PC Name' value={pcName} onChange={handlePCNameChange}></input>
+                        <select value={selectedComponent} onChange={handleComponentTypeChange}>
+                            <option value="">Select Component Type</option>
+                            <option value="CPU">CPU</option>
+                            <option value="GPU">GPU</option>
+                            <option value="SSD1">SSD1</option>
+                            <option value="SSD2">SSD2</option>
+                            <option value="RAM">RAM</option>
+                            <option value="Case">Case</option>
+                            <option value="Additional">Additional</option>
+                        </select>
+                        {selectedComponent && (
+                            <div>
+                                <input type="text" placeholder="Component Name" value={componentName} onChange={handleComponentNameChange} />
+                                <input type="number" placeholder="Component Price" value={componentPrice} onChange={handleComponentPriceChange} />
+                                <button onClick={handleAddComponent}>Add Component</button>
+                            </div>
+                        )}
+                        {/* Display the list of current PC components */}
+                        <div className='pcComponentList'>
+                            <h2>PC Components</h2>
+                            <ul>
+                                {pcComponents.map((component, index) => (
+                                    <li key={index}>
+                                        {component.type} - {component.name} - ${component.price}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    )}
-                    {/* Display the list of current PC components */}
-                    <div className='pcComponentList'>
-                        <h2>PC Components</h2>
-                        <ul>
-                            {pcComponents.map((component, index) => (
-                                <li key={index}>
-                                    {component.type} - {component.name} - ${component.price}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className='submitButton'>
-                        <button onClick={handleSubmitPC}>Submit</button>
+                        <div className='submitButton'>
+                            <button onClick={handleSubmitPC}>Submit</button>
+                        </div>
                     </div>
                 </div>
+                
             )}
             {/* Display fetched PCs */}
                 <div className="pcsList">
