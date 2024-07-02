@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
   return (
     <nav>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
+      <ul className="navBarUL">
         <li style={{ display: 'inline', marginRight: '20px' }}>
           <Link to="/">Home</Link>
         </li>
-        <li style={{ display: 'inline', marginRight: '20px' }}>
+        <li style={{ display: 'inline', marginRight: '20px'  }}>
           <Link to="/PcPage">Pc</Link>
         </li>
         {/* Add more navigation links as needed */}
